@@ -1,6 +1,6 @@
 <template>
   <div>
-      首页
+      简历
   </div>
 </template>
 
