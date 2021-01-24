@@ -19,6 +19,7 @@
       <a-form-item label="密码">
       <a-input
         size="large"
+        type="password"
         v-decorator="['password', { rules: [{ required: true, message: '请输入您的密码' }] }]"
         placeholder="请输入您的密码"
       />
@@ -42,7 +43,7 @@
   </a-form>
 </template>
 <script>
-
+import {goLogin} from "../../api/Interface/index"
 export default {
   name: 'Home',
   components: {
@@ -66,15 +67,26 @@ export default {
     },
     handleChange(e) {
       this.checkNick = e.target.checked;
-      // this.$nextTick(() => {
-      //   this.form.validateFields(['nickname'], { force: true });
-      // });
     },
     handleSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
+          let obj = {
+            account: values.account,
+            password: values.password
+          }
+          goLogin(obj).then(res=>{
+            console.log(res);
+            if(res.data.code === 1 ){
+              this.$router.push("/Home")
+            }else if(res.data.code  === 4){
+              this.$router.push("/Login")
+            }else{
+              console.log("登录失败")
+            }
+          })
         }
       });
     },
