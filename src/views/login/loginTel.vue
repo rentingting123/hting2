@@ -43,7 +43,7 @@
   </a-form>
 </template>
 <script>
-import {goLogin} from "../../api/Interface/index"
+import {goLogin} from "@/api/Interface/index"
 export default {
   name: 'Home',
   components: {

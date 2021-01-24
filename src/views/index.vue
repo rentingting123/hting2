@@ -19,18 +19,22 @@
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="() => (collapsed = !collapsed)"
         />
+        <a-tooltip title="刷新页面">
+          <a-icon type="reload" style="font-size: 18px;cursor: pointer;" @click="() => { $message.success('刷新成功') }" />
+        </a-tooltip>
       </a-layout-header>
       <a-layout-content
         :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }"
       >
-        <div style="height:1000px">Content</div>
+        <!-- <div style="height:1000px">Content</div> -->
+        <router-view></router-view>
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 <script>
 import Menu from "./layout/menu"
-import logo from "../assets/img/logo.png"
+import logo from "@/assets/img/logo.png"
 
 export default {
   components: { Menu },

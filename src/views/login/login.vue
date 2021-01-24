@@ -42,14 +42,13 @@ export default {
   .leftimg{
     width: 50%;
     height: 100%;
-    background: url("../../assets/img/loginbg.png") no-repeat left center;
+    background: url("/@/assets/img/loginbg.png") no-repeat left center;
     background-size: cover;
-
   }
  .infobox{
     width: 50%;
     height: 100%;
-    background: #FFFFFF url("../../assets/img/loginbottom.png") no-repeat right bottom;
+    background: #FFFFFF url("/@/assets/img/loginbottom.png") no-repeat right bottom;
     background-size: 100px;
     border-radius: 30px;
     padding: 60px 0;
