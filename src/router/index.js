@@ -10,17 +10,17 @@ import myInfo from '@/views/myInfo'
 import login from '@/views/login/login'
 import NotFound from '@/views/NotFound'
 
-import * as icons from '@/assets/icons';
+// import * as icons from '@/assets/icons';
 Vue.use(VueRouter)
 
-const pageRouter = [
+export const pageRouter = [
   {
     path: '/Home',
     name: 'Home',
     component: Home,
     meta: {
       title: '首页',
-      icon: icons.order
+      icon: 'line-chart'
     },
   },
   {
@@ -29,7 +29,7 @@ const pageRouter = [
     component: position,
     meta: {
       title: '职位管理',
-      icon: icons.order
+      icon: 'apartment'
     },
   },
   {
@@ -38,7 +38,7 @@ const pageRouter = [
     component: resume,
     meta: {
       title: '简历管理',
-      icon: icons.order
+      icon: 'file-protect'
     },
   },
   {
@@ -47,7 +47,7 @@ const pageRouter = [
     component: customer,
     meta: {
       title: '客户管理',
-      icon: icons.order
+      icon: 'deployment-unit'
     },
   },
   {
@@ -56,17 +56,17 @@ const pageRouter = [
     component: operate,
     meta: {
       title: '运营管理',
-      icon: 'table'
+      icon: 'team'
     },
   },
   {
     path: '/myInfo',
     name: 'myInfo',
     component: myInfo,
-    hideInMenu: true,
+    hidden: true,
     meta: {
       title: '个人中心',
-      icon: icons.order
+      icon: 'user'
     },
   },
 ]
@@ -78,7 +78,7 @@ const routes = [
     redirect: '/Home',
     children: [ 
       ...pageRouter,
-      { path: '*', hideInMenu: true, component: NotFound }
+      { path: '*', hidden: true, component: NotFound }
      ]
   },
   {

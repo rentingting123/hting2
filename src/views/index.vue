@@ -1,79 +1,83 @@
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider
-      v-model="collapsed"
-      :trigger="null"
-      collapsible
-      breakpoint="lg"
-      theme="light"
-    >
-      <div class="logo" >
-        <img :src="logo" alt="" :class="collapsed?'imgsmall':'img'">
+  <pro-layout
+    :menus="menus"
+    :collapsed="collapsed"
+    :theme="theme"
+    :layout="layout"
+    :contentWidth="contentWidth"
+    :auto-hide-header="autoHideHeader"
+    :mediaQuery="query"
+    :isMobile="isMobile"
+    :handleMediaQuery="handleMediaQuery"
+    :handleCollapse="handleCollapse"
+  >
+    <template v-slot:menuHeaderRender>
+      <div>
+        <img src="@/assets/img/logo.png" alt="" :class="collapsed?'img':'imgsmall'">
       </div>
-      <Menu />
-    </a-layout-sider>
-    <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
-          class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)"
-        />
-        <a-tooltip title="刷新页面">
-          <a-icon type="reload" style="font-size: 18px;cursor: pointer;" @click="() => { $message.success('刷新成功') }" />
-        </a-tooltip>
-      </a-layout-header>
-      <a-layout-content
-        :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }"
-      >
-        <!-- <div style="height:1000px">Content</div> -->
-        <router-view></router-view>
-      </a-layout-content>
-    </a-layout>
-  </a-layout>
+    </template>
+    <template v-slot:rightContentRender>
+      <div :class="['ant-pro-global-header-index-right', layout === 'topmenu' && `ant-pro-global-header-index-${theme}`]">
+        <AvatarDropdown />
+      </div>
+    </template>
+    <router-view />
+  </pro-layout>
 </template>
+
 <script>
-import Menu from "./layout/menu"
+import ProLayout from '@ant-design-vue/pro-layout'
+import {pageRouter} from '@/router'
 import logo from "@/assets/img/logo.png"
+import AvatarDropdown from '@/views/layout/AvatarDropdown'
 
 export default {
-  components: { Menu },
-  data() {
+  name: 'BasicLayout',
+  data () {
     return {
+      menus: [],
       collapsed: false,
+      autoHideHeader: false,
+      query: {},
+      layout: 'sidemenu',
+      contentWidth: 'Fluid',
+      theme: 'light',
+      isMobile: false,
       logo
-    };
+    }
   },
-};
+  created () {
+    console.log(pageRouter);
+    this.menus = pageRouter ? pageRouter : []
+  },
+  methods: {
+    handleMediaQuery (query) {
+      this.query = query
+      if (this.isMobile && !query['screen-xs']) {
+        this.isMobile = false
+        return
+      }
+      if (!this.isMobile && query['screen-xs']) {
+        this.isMobile = true
+        this.collapsed = false
+      }
+    },
+    handleCollapse (collapsed) {
+      this.collapsed = collapsed
+    }
+  },
+  components: {
+    ProLayout,
+    AvatarDropdown
+  }
+}
 </script>
-<style>
-#components-layout-demo-custom-trigger{
-  height: 100vh;
-}
-
-
-#components-layout-demo-custom-trigger .trigger {
-  font-size: 18px;
-  line-height: 64px;
-  padding: 0 24px;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-#components-layout-demo-custom-trigger .trigger:hover {
-  color: #1890ff;
-}
-
-#components-layout-demo-custom-trigger .logo {
-  height: 40px;
-  background: rgba(0, 0, 0, );
-  margin:  10px 20px;
-  line-height: 40px;
-}
-#components-layout-demo-custom-trigger .logo .img{
-  height: 40px;
-}
-#components-layout-demo-custom-trigger .logo .imgsmall{
+<style scoped>
+.img{
   height: 18px;
+}
+.imgsmall{
+  width: 150px;
+  height: 56px;
 }
 </style>
