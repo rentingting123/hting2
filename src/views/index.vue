@@ -47,7 +47,6 @@ export default {
     }
   },
   created () {
-    console.log(pageRouter);
     this.menus = pageRouter ? pageRouter : []
   },
   methods: {

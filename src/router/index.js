@@ -4,11 +4,17 @@ import index from '@/views/index.vue'
 import Home from '@/views/Home'
 import position from '@/views/position'
 import resume from '@/views/resume'
+//客户管理
 import customer from '@/views/customer'
+import customerAdd from '@/views/customer/add'
+
 import operate from '@/views/operate'
 import myInfo from '@/views/myInfo'
 import login from '@/views/login/login'
-import NotFound from '@/views/NotFound'
+
+
+
+// import NotFound from '@/views/NotFound'
 
 // import * as icons from '@/assets/icons';
 Vue.use(VueRouter)
@@ -45,9 +51,19 @@ export const pageRouter = [
     path: '/customer',
     name: 'customer',
     component: customer,
+    hideChildrenInMenu: true,
     meta: {
       title: '客户管理',
       icon: 'deployment-unit'
+    },
+  },
+  {
+    path: '/customerAdd',
+    name: 'customerAdd',
+    component: customerAdd,
+    hidden: true,
+    meta: {
+      title: '添加客户',
     },
   },
   {
@@ -78,7 +94,7 @@ const routes = [
     redirect: '/Home',
     children: [ 
       ...pageRouter,
-      { path: '*', hidden: true, component: NotFound }
+      // { path: '*', hidden: true, component: NotFound }
      ]
   },
   {
