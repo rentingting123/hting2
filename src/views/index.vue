@@ -30,7 +30,6 @@ import ProLayout from '@ant-design-vue/pro-layout'
 import {pageRouter} from '@/router'
 import logo from "@/assets/img/logo.png"
 import AvatarDropdown from '@/views/layout/AvatarDropdown'
-
 export default {
   name: 'BasicLayout',
   data () {
@@ -43,7 +42,7 @@ export default {
       contentWidth: 'Fluid',
       theme: 'light',
       isMobile: false,
-      logo
+      logo,
     }
   },
   created () {
@@ -72,6 +71,11 @@ export default {
 }
 </script>
 <style scoped>
+.ant-pro-basicLayout-content{
+  background: #F2F7FF;
+  margin: 0;
+  padding: 20px;
+}
 .img{
   height: 18px;
 }
