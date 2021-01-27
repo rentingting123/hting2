@@ -5,7 +5,7 @@
 			default-active-key="1"
 			@change="callback"
 			class="rankTitleBox"
-			tabBarStyle="border-bottom: none;">
+			:tabBar-Style="{borderBottom: 'none'}">
       <a-tab-pane key="1" tab="月排名">
       </a-tab-pane>
       <a-tab-pane key="2" tab="季度排名" >
@@ -31,7 +31,7 @@
 import RankList from './RankList';
 
 const rankListdata = []
-for (let i = 0; i < 9; i++) {
+for (let i = 0; i < 5; i++) {
   rankListdata.push({
 		name: '张三 ' + (i + 1) ,
 		job: "科技组",
@@ -48,11 +48,11 @@ export default {
 	components:{
 		RankList
 	},
-//监听属性 类似于data概念
-computed: {},
-//监控data中的数据变化
-watch: {},
-//方法集合
+	//监听属性 类似于data概念
+	computed: {},
+	//监控data中的数据变化
+	watch: {},
+	//方法集合
 	methods: {
 		callback(key) {
 			console.log(key);

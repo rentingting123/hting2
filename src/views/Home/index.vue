@@ -6,22 +6,22 @@
           <Statistics />
         </a-col>
         <a-col :sm="24" :md="12" :xl="8">
-         <annualTarget />
+         <AnnualTarget />
         </a-col>
       </a-row>
-      <ranking />
+      <Ranking />
     </a-col>
     <a-col :sm="24" :md="12" :xl="6" class="">
-      2代办事项
+      <AgentNews />
     </a-col>
   </a-row>
 </template>
 
 <script>
 import Statistics from "./Statistics"
-import annualTarget from "./annualTarget"
-import ranking from "./ranking"
-
+import AnnualTarget from "./annualTarget"
+import Ranking from "./ranking"
+import AgentNews from "./AgentNews"
 export default {
   data() {
     return {
@@ -30,8 +30,9 @@ export default {
   },
   components: {
     Statistics, //统计 上周 本周
-    annualTarget, // 年度目标
-    ranking, // 排名
+    AnnualTarget, // 年度目标
+    Ranking, // 排名
+    AgentNews //代办事项
   }
 }
 </script>

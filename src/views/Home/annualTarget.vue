@@ -5,33 +5,73 @@
 				<span class="kpitit">年度目标</span>
 				<div class="kpitext">{{ kpi }}万</div>
 			</div> 
+			<div id="main" ref="main"></div>
     </div>
 </template>
 
 <script>
+import * as echarts from 'echarts';
 
 export default {
 	data() {
 		return {
-			kpi: 200 //年度目标
+			kpi: 200., //年度目标
+			option: null //图表配置
 		};
 	},
-//监听属性 类似于data概念
-computed: {},
-//监控data中的数据变化
-watch: {},
-//方法集合
-methods: {
-
-},
-//生命周期 - 创建完成（可以访问当前this实例）
-created() {
-
-},
-//生命周期 - 挂载完成（可以访问DOM元素）
-mounted() {
-
-},
+	// 生命周期 - 创建完成（可以访问当前this实例）
+	created() {
+		this.drawChart()
+	},
+	// 方法集合
+	methods: {
+		drawChart(){
+			this.$nextTick(()=>{
+				const chartDom = this.$refs.main;
+				const myChart = echarts.init(chartDom);
+				this.option = {
+					tooltip: {
+						trigger: 'item'
+					},
+					color:['#56C8E9','#435EBE'],
+					legend: {
+						bottom: '1%',
+						// left: 'center'
+					},
+					grid:{
+						y:-20,
+					},
+					series: [
+						{
+							name: '年度目标',
+							type: 'pie',
+							radius: ['40%', '70%'],
+							avoidLabelOverlap: false,
+							label: {
+								show: false,
+								position: 'center'
+							},
+							emphasis: {
+								label: {
+									show: true,
+									fontSize: '20',
+									fontWeight: 'bold'
+								}
+							},
+							labelLine: {
+								show: false
+							},
+							data: [
+								{value: 300, name: '未完成'},
+								{value: 700, name: '已完成'},
+							]
+						}
+					]
+				};
+				this.option && myChart.setOption(this.option);
+			})
+		}
+	},
 }
 </script>
 <style scoped>
@@ -46,7 +86,7 @@ mounted() {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 16px;
+	padding: 16px 16px 0;
 }
 .kpitit{
 	font-size: 16px;
@@ -57,5 +97,11 @@ mounted() {
 	font-size: 22px;
 	font-weight: 600;
 	color: #435EBE;
+}
+#main{
+	width: 100%;
+	height: 310px;
+	margin-top:-20px ;
+	/* background: #f00; */
 }
 </style>

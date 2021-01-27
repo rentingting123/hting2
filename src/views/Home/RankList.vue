@@ -10,6 +10,7 @@
         <span>{{ item.job }}</span>
         <span>{{ item.total.toFixed(2) }}元</span>
       </li>
+      <div class="lookMore" @click="lookMore">查看全部</div>
     </ul>
   </div>
 </template>
@@ -17,7 +18,6 @@
 <script>
 export default {
   name: 'RankList',
-  // ['title', 'list']
   props: {
     title: {
       type: String,
@@ -26,6 +26,11 @@ export default {
     list: {
       type: Array,
       default: null
+    }
+  },
+  methods: {
+    lookMore(){
+      console.log("产看更多")
     }
   }
 }
@@ -37,10 +42,16 @@ export default {
     background: #FFFFFF;
     box-shadow: 0px 0px 14px 0px rgba(218, 223, 255, 0.88);
     border-radius: 24px;
+    .title{
+      font-size: 16px;
+      font-weight: 500;
+      color: #282828;
+      line-height: 25px;
+    }
     .list {
-      margin: 25px 0 0;
+      margin: 12px 0 0;
       padding: 0;
-      height: 260px;
+      height: 280px;
       list-style: none;
       overflow: auto;
       li {
@@ -90,5 +101,13 @@ export default {
   .mobile .rank {
      margin: 25px 0 0;
   }
-
+  .lookMore{
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2F437C;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+  }
 </style>
