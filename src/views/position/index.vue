@@ -34,10 +34,8 @@
         </a-select>
       </a-form-item>
       <a-form-item style="width:90px">
-        <a-button type="primary">本周进度</a-button>
-      </a-form-item>
-      <a-form-item style="width:90px">
-        <a-button>上周进度</a-button>
+        <a-button class="primarybtn">本周进度</a-button>
+        <a-button class="marginleft">上周进度</a-button>
       </a-form-item>
       <a-form-item class="fromItem1">
         <a-button  class="clear-from-button">清除</a-button>

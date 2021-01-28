@@ -1,5 +1,10 @@
 <template>
-  <a-table :columns="columns" :data-source="data" :pagination="pagination" @change="handlePagination">
+  <a-table
+    :columns="columns"
+    :data-source="data"
+    :pagination="pagination"
+    @change="handlePagination"
+    :customRow="customRow">
     <div slot="positionname" slot-scope="text,scord">
       {{ text }}
       <a-badge v-if="scord.key == 1" count="急" :numberStyle="numberStyle"></a-badge>
@@ -208,6 +213,16 @@ export default {
 		handlePagination(pagination){
       console.log(pagination.current);
     },
+    customRow(record){
+      return {
+        on: { // 事件
+          click: () => {
+            console.log(record);
+            this.$router.push({path:'/positionDetails'});
+          }, 
+        },
+      };
+    }
 	}
 };
 </script>

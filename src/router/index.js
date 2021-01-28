@@ -2,9 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from '@/views/index.vue'
 import Home from '@/views/Home'
+// 职位管理
 import position from '@/views/position'
+import positionDetails from '@/views/position/details'
+
 import resume from '@/views/resume'
-//客户管理
+// 客户管理
 import customer from '@/views/customer'
 import customerAdd from '@/views/customer/add'
 
@@ -36,6 +39,17 @@ export const pageRouter = [
     meta: {
       title: '职位管理',
       icon: 'apartment'
+    },
+  },
+  {
+    path: '/positionDetails',
+    name: 'positionDetails',
+    component: positionDetails,
+    hidden: true,
+    meta: {
+      title: '职位详情',
+      icon: 'file-protect',
+      hideChildrenInMenu: true,
     },
   },
   {
