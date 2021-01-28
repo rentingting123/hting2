@@ -5,7 +5,7 @@
 			default-active-key="1"
 			@change="callback"
 			class="rankTitleBox"
-			:tabBar-Style="{borderBottom: 'none'}">
+			:tabBarStyle="{borderBottom: 'none'}">
       <a-tab-pane key="1" tab="月排名">
       </a-tab-pane>
       <a-tab-pane key="2" tab="季度排名" >
@@ -43,6 +43,7 @@ export default {
 		//这里存放数据
 		return {
 			rankListdata
+			
 		};
 	},
 	components:{

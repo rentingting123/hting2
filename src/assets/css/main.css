@@ -4,3 +4,40 @@
 .ant-tabs-ink-bar {
   background-color: #435EBE;
 }
+.ant-btn {
+  border-radius: 10px;
+}
+.danger-from-button {
+  background: #FF6D6B;
+}
+.clear-from-button {
+  color: #FF6864;
+  border: 1px solid #FF6864;
+}
+.marginleft {
+  margin-left: 10px;
+}
+.tabs {
+  margin-top: 20px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 14px 0px rgba(218, 223, 255, 0.88);
+  border-radius: 14px;
+  padding: 10px 24px;
+  box-sizing: border-box;
+}
+.ant-table-thead > tr > th {
+  color: white;
+  background: #435EBE !important;
+}
+.ant-table-tbody > tr:nth-child(2n) {
+  background: rgba(218, 223, 255, 0.5) !important;
+}
+.action {
+  font-size: 16px;
+  font-weight: 500;
+  color: #435EBE;
+  line-height: 25px;
+}
+.primColor {
+  color: #435EBE;
+}

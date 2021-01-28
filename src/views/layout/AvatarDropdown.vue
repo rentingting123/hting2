@@ -1,23 +1,30 @@
 <template>
-  <a-dropdown placement="bottomRight">
-    <span class="ant-pro-account-avatar">
-      <a-avatar size="small" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" class="antd-pro-global-header-index-avatar" />
-      <span class="name">{{ name }}</span>
-    </span>
-    <template v-slot:overlay>
-      <a-menu class="ant-pro-drop-down menu" :selected-keys="[]">
-        <a-menu-item key="center" @click="handleToCenter">
-          <a-icon type="user" />
-         个人中心
+  <div class="avatarRight">
+    <a-dropdown>
+      <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+        上传简历
+      </a>
+      <a-menu slot="overlay">
+        <a-menu-item>
+          <a href="javascript:;">新增简历</a>
         </a-menu-item>
-        <a-menu-divider />
-        <a-menu-item key="logout" @click="handleLogout">
-          <a-icon type="logout" />
-          退出登录
+        <a-menu-item>
+          <a href="javascript:;">新增职位</a>
+        </a-menu-item>
+        <a-menu-item>
+          <a href="javascript:;">新增客户</a>
         </a-menu-item>
       </a-menu>
-    </template>
-  </a-dropdown>
+    </a-dropdown>
+    <span class="ant-pro-account-avatar">
+      <a-avatar size="small" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" class="antd-pro-global-header-index-avatar" />
+      <span class="name">{{ name }} / 猎头顾问-AC2</span>
+    </span>
+    <div  @click="handleLogout" class="exitbtn">
+      <a-icon type="poweroff" class="primColor" />
+      退出
+    </div>
+  </div>
 </template>
 
 <script>
@@ -57,9 +64,16 @@ export default {
   margin-right: 20px;
   display: flex;
   align-items: center;
+  margin-left: 70px;
 }
 .ant-pro-account-avatar .name{
-  margin-left: 6px;
+  margin-left: 8px;
+  color: #282828;
+}
+.antd-pro-global-header-index-avatar{
+   width: 40px;
+  height: 40px;
+  background: #206BFF;
 }
 .ant-pro-drop-down {
   /deep/ .action {
@@ -68,5 +82,11 @@ export default {
   /deep/ .ant-dropdown-menu-item {
     min-width: 160px;
   }
+}
+.avatarRight{
+  display: flex;
+}
+.exitbtn{
+  margin-right: 20px;
 }
 </style>
