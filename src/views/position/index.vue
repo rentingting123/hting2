@@ -155,17 +155,5 @@ import positionTable from './positionTable';
 </script>
 
 <style>
-  .searchForm{
-    padding: 20px !important;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 14px 0px rgba(218, 223, 255, 0.88);
-    border-radius: 14px;
-  }
-  .fromItem{
-    width:160px
-  }
-  .fromItem1{
-    width:180px;
-    text-align: right;
-  }
+  
 </style>

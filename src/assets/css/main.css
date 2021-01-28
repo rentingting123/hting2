@@ -14,6 +14,16 @@
   color: #FF6864;
   border: 1px solid #FF6864;
 }
+.danger-from-button1 {
+  background: #435EBE;
+}
+.clear-from-button1 {
+  color: #435EBE;
+  border: 1px solid #435EBE;
+}
+.fromMargin {
+  margin: 16px 0;
+}
 .marginleft {
   margin-left: 10px;
 }
@@ -40,4 +50,32 @@
 }
 .primColor {
   color: #435EBE;
+}
+.redColor {
+  color: #FD4944;
+}
+.yellowColor {
+  color: #FF9919;
+}
+.grayColor {
+  color: #999999;
+}
+.searchForm {
+  padding: 20px !important;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 14px 0px rgba(218, 223, 255, 0.88);
+  border-radius: 14px;
+}
+.fromItem {
+  width: 160px;
+}
+.fromItem1 {
+  float: right;
+  width: 180px;
+  text-align: right;
+}
+.cardBox {
+  box-shadow: 0px 0px 14px 0px rgba(218, 223, 255, 0.88);
+  border-radius: 14px;
+  margin-bottom: 20px;
 }

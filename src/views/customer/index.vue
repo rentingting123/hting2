@@ -1,154 +1,146 @@
 <template>
-  <a-card :bordered="false">
-    <div class="table-page-search-wrapper">
-      <a-form layout="inline">
-        <a-row :gutter="8">
-          <a-col :md="6" :sm="24">
-            <a-form-item>
-              <a-input v-model="queryParam.id" placeholder="请输入企业名称"/>
-            </a-form-item>
-          </a-col>
-          <a-col :md="6" :sm="24">
-            <a-form-item >
-              <a-select v-model="queryParam.status" placeholder="请选择行业" default-value="0" class="slelectbox" style="width:200px">
-                <a-select-option value="0">全部</a-select-option>
-                <a-select-option value="1">关闭</a-select-option>
-                <a-select-option value="2">运行中</a-select-option>
-              </a-select>
-            </a-form-item>
-          </a-col>
-           <a-col :md="6" :sm="24">
-              <a-form-item>
-                <a-select v-model="queryParam.useStatus" placeholder="请选择招聘状态" class="slelectbox" default-value="0"  style="width:200px">
-                  <a-select-option value="0">全部</a-select-option>
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-          <template v-if="advanced">
-             <a-col :md="6" :sm="24">
-              <a-form-item>
-                <a-select v-model="queryParam.useStatus" placeholder="请选择企业规模" class="slelectbox" default-value="0"  style="width:200px">
-                  <a-select-option value="0">全部</a-select-option>
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="6" :sm="24">
-             <a-form-item>
-                <a-select v-model="queryParam.useStatus" placeholder="请选择融资情况" class="slelectbox" default-value="0"  style="width:200px">
-                  <a-select-option value="0">全部</a-select-option>
-                  <a-select-option value="1">关闭</a-select-option>
-                  <a-select-option value="2">运行中</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :md="6" :sm="24">
-              <a-form-item label="创建时间">
-                <a-date-picker v-model="queryParam.date" style="width: 100%" placeholder="请输入更新日期"/>
-              </a-form-item>
-            </a-col>
-          </template>
-          <a-col :md="!advanced && 6 || 24" :sm="24">
-            <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
-              <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
-              <a-button style="margin-left: 8px" @click="() => this.queryParam = {}">重置</a-button>
-              <a @click="toggleAdvanced" style="margin-left: 8px">
-                {{ advanced ? '收起' : '展开' }}
-                <a-icon :type="advanced ? 'up' : 'down'"/>
-              </a>
-            </span>
-          </a-col>
-        </a-row>
-      </a-form>
-      <a-table :columns="columns" :data-source="data">
-        <template slot="title" >
-          <div class="titleBtn">
-            <router-link :to="{name:'customerAdd'}">
-              <a-button>添加客户</a-button>
-            </router-link>
-          </div>
-        </template>
-        <a slot="name" slot-scope="text">{{ text }}</a>
-        <span slot="customTitle"><a-icon type="smile-o" /> Name</span>
-        <span slot="tags" slot-scope="tags">
-          <a-tag
-            v-for="tag in tags"
-            :key="tag"
-            :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-          >
-            {{ tag.toUpperCase() }}
-          </a-tag>
+  <div>
+    <a-form layout="inline">
+      <a-row class="addTitle">
+        <a-col :md="12">
+          <a-select v-model="queryParam.useStatus" placeholder="我负责的客户" class="slelectbox" default-value="0"  style="width:200px">
+            <a-select-option value="0">全部</a-select-option>
+            <a-select-option value="1">关闭</a-select-option>
+            <a-select-option value="2">运行中</a-select-option>
+          </a-select>
+        </a-col>
+        <a-col :md="12" style="text-align:right">
+          <router-link :to="{name:'customerAdd'}">
+            <a-button type="danger" class="danger-from-button">
+              <a-icon type="plus-circle" theme="filled" />添加客户
+            </a-button>
+          </router-link>
+        </a-col>
+      </a-row>
+    </a-form>
+     <a-form layout="inline" class="searchForm fromMargin">
+      <a-form-item class="fromItem">
+        <a-input v-model="queryParam.positionName" placeholder="请输入企业名称" allowClear />
+      </a-form-item>
+      <a-form-item class="fromItem">
+        <a-select v-model="queryParam.status" placeholder="请选择行业" default-value="0" allowClear style="width:160px">
+          <a-select-option value="0">全部</a-select-option>
+          <a-select-option value="1">关闭</a-select-option>
+          <a-select-option value="2">运行中</a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item class="fromItem">
+        <a-select v-model="queryParam.status0" placeholder="请选择招聘状态" default-value="0" allowClear style="width:160px">
+          <a-select-option value="0">全部</a-select-option>
+          <a-select-option value="1">关闭</a-select-option>
+          <a-select-option value="2">运行中</a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item class="fromItem">
+        <a-select v-model="queryParam.status1" placeholder="请选择企业规模" default-value="0" allowClear style="width:160px">
+          <a-select-option value="0">全部</a-select-option>
+          <a-select-option value="1">关闭</a-select-option>
+          <a-select-option value="2">运行中</a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item class="fromItem">
+        <a-select v-model="queryParam.status2" placeholder="请选择融资情况" default-value="0" allowClear style="width:160px">
+          <a-select-option value="0">全部</a-select-option>
+          <a-select-option value="1">关闭</a-select-option>
+          <a-select-option value="2">运行中</a-select-option>
+        </a-select>
+      </a-form-item>
+      <a-form-item class="fromItem1">
+        <a-button  class="clear-from-button1">清除</a-button>
+        <a-button type="primary" class="danger-from-button1 marginleft">搜索</a-button>
+      </a-form-item>
+    </a-form>
+    <a-card :bordered="false">
+      <a-table :columns="columns" :data-source="data" :pagination="pagination" @change="handlePagination">
+        <div slot="name" slot-scope="text">
+          <span class="primColor">{{ text }}</span>
+        </div>
+        <span slot="status" slot-scope="text">
+          <span :class="text === 1 ? 'primColor' : text === 2 ? 'yellowColor' : text === 3 ? 'grayColor':''">
+            {{text === 1 ? '运作中' : text === 2 ? '已交付' : text === 3 ? '已结束':''}}
+          </span>
         </span>
-        <template slot="operation" slot-scope="text, record">
-          <router-link :to="{name:'customer-edit',params:{id:record.id}}">
-            <a-button type="link" icon="edit" />
-          </router-link>
-          <router-link :to="{name:'customer-edit',params:{id:record.id}}">
-            详情
-          </router-link>
-          <Popconfirm title="确定删除吗？" @confirm="handleDelete(record.id)">
-            <a-button type="link" icon="delete" />
-          </Popconfirm>
-        </template>
       </a-table>
-    </div>
-  </a-card>
+    </a-card> 
+  </div>
 </template>
 
 <script>
 const columns = [
   {
-    title: '行业企业名称',
+    title: '企业名称',
     dataIndex: 'name',
     key: 'name',
     scopedSlots: { customRender: 'name' },
   },
   {
     title: '行业',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: '城市',
-    dataIndex: 'address',
-    key: 'address',
+    dataIndex: 'hangye',
+    key: 'hangye',
   },
   {
     title: '招聘状态',
-    key: 'tags',
-    dataIndex: 'tags',
-    scopedSlots: { customRender: 'tags' },
+    dataIndex: 'status',
+    key: 'status',
+    scopedSlots: { customRender: 'status' },
   },
   {
-    title: '操作',
-    key: 'operation',
-    scopedSlots: { customRender: 'operation' },
+    title: '在招职位',
+    key: 'position',
+    dataIndex: 'position',
   },
+  {
+    title: '维护人',
+    key: 'people',
+    dataIndex: 'people',
+  },
+  {
+    title: '最后沟通内容',
+    key: 'comncont',
+    dataIndex: 'comncont',
+    width: 300
+  },
+  {
+    title: '最后沟通时间',
+    key: 'time',
+    dataIndex: 'time'
+  }
 ];
 const data = [
   {
     key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
+    name: '百度网络',
+    hangye: 'IT互联网',
+    status: 1,
+    position:'运营总监/技术总监',
+    people: '张三',
+    comncont: '职位暂停目前不需要人了， 有需要再联系,职位暂停目前不需要人了，职位暂停目前不需要人了，职位暂停目前不需要人了，职位暂停目前不需要人了，',
+    time: '2020.12.31 17:30',
   },
   {
     key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
+    name: '百度网络',
+    hangye: 'IT互联网',
+    status: 2,
+    position:'运营总监/技术总监',
+    people: '张三',
+    comncont: '职位暂停目前不需要人了， 有需要再联系',
+    time: '2020.12.31 17:30'
   },
   {
     key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
+    name: '百度网络',
+    hangye: 'IT互联网',
+    status: 3,
+    position:'运营总监/技术总监',
+    people: '张三',
+    comncont: '职位暂停目前不需要人了， 有需要再联系',
+    time: '2020.12.31 17:30'
   },
 ];
 export default {
@@ -165,27 +157,20 @@ export default {
       columns,
       advanced: false, // 高级搜索 展开/关闭
       queryParam: {},  // 查询参数
+      pagination: {
+        showQuickJumper :true,
+        total: 0,
+        current: 1,
+        pageSize: 10,
+        size: 'small',
+        showTotal: (total) => `共${total}条`
+      },
     }
   },
   methods: {
-    //展开收起
-    toggleAdvanced () {
-      this.advanced = !this.advanced
+    handlePagination(pagination){
+      console.log(pagination.current);
     },
-    //删除
-    handleDelete(id) {
-      console.log(id);
-      // customDelete(id).then(res=>{
-      //   if(res.data.success){
-      //     message.success('删除成功');
-      //     this.getCustomList();
-      //   }else{
-      //     message.error(res.data.msg);
-      //   }
-      // }).catch(err=>{
-        // console.log(err);
-      // });
-    }
   }
 }
 </script>
