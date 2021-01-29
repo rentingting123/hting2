@@ -61,6 +61,9 @@
 .grayColor {
   color: #999999;
 }
+.fontSize26 {
+  font-size: 26px;
+}
 .searchForm {
   padding: 20px !important;
   background: #FFFFFF;
@@ -90,4 +93,22 @@
 }
 .marginTB {
   margin: 20px 0;
+}
+.marginB {
+  margin-bottom: 42px;
+}
+.contentText {
+  font-size: 16px;
+  font-weight: 400;
+  color: #242424;
+  line-height: 30px;
+}
+.iconbg {
+  background: #10B8E5;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 16px;
+  display: inline-block;
 }

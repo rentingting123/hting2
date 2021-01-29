@@ -1,6 +1,6 @@
 <!--  -->
 <template>
-  <div class='title'>{{ title }}</div>
+  <div :class="type == 1?'title1':'title0'" class="title">{{ title }}</div>
 </template>
 <script>
 	export default {
@@ -10,20 +10,25 @@
 
 			};
 		},
-		props: ['title'],
+		props: ['title','type'],
 	}
 </script>
 <style scoped>
 	.title{
 		height: 30px;
-		font-size: 18px;
 		font-weight: 500;
 		color: #2F437C;
 		line-height: 25px;
 		position: relative;
 		margin-bottom: 10px;
 	}
-	.title:after{
+	.title1{
+		font-size: 20px;
+	}
+	.title0{
+		font-size: 18px;
+	}
+	.title0:after{
 		content: '';
 		position: absolute;
 		bottom: 0;

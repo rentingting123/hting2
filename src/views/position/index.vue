@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import positionTable from './positionTable';
+import positionTable from './components/positionTable';
   const columns = [
     {
       title: '行业企业名称',

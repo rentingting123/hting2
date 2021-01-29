@@ -22,10 +22,21 @@
 			</div>
 		</div>
 		<div class="marginTB">
-			<a-button class="primarybtn">推荐详情</a-button>
-      <a-button class="marginleft">职位详情</a-button>
+			<a-button
+				:type="showBtn === 1?'primary':''"
+				:class="showBtn === 1?'primarybtn':'' "
+				@click="btnChange(1)">
+				推荐详情
+			</a-button>
+      <a-button
+				:type="showBtn === 2?'primary':''"
+				:class="showBtn === 2?'primarybtn':'' "
+				class="marginleft"
+				@click="btnChange(2)">
+				职位详情
+			</a-button>
 		</div>
-		<a-tabs class="tabs" :tabBarStyle="{borderBottom: 'none'}" >
+		<a-tabs v-if="showBtn === 1" class="tabs" :tabBarStyle="{borderBottom: 'none'}" >
       <a-tab-pane key="1" tab="全部(26)">
         <detailsTable />
       </a-tab-pane>
@@ -54,11 +65,22 @@
         <detailsTable />
       </a-tab-pane>
     </a-tabs>
+		<a-row v-if="showBtn === 2" :gutter="24">
+			<a-col :sm="24" :md="12" :xl="14" >
+				<detailsPL />
+			</a-col>
+			<a-col :sm="24" :md="12" :xl="10">
+				<detailsPR />
+			</a-col>
+		</a-row>
 	</div>
 </template>
 
 <script>
-import detailsTable from './detailsTable'
+import detailsTable from './components/detailsTable'
+import detailsPL from './components/detailsPL'
+import detailsPR from './components/detailsPR'
+
 const numberStyle = {
   borderRadius: '1px',
   width: '16px',
@@ -72,15 +94,21 @@ const numberStyle = {
 export default {
 	data() {
 		return {
-			numberStyle
+			numberStyle,
+			showBtn: 1
 		};
 	},
 	components:{
-		detailsTable
+		detailsTable,
+		detailsPL,
+		detailsPR
 	},
 	//方法集合
 	methods: {
-
+		//按钮切换
+		btnChange(i){
+			this.showBtn = i
+		}
 	},
 	//生命周期 - 创建完成（可以访问当前this实例）
 	created() {
