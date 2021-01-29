@@ -5,7 +5,10 @@
       <a-row class="detailsposition">
         <a-col>
           <span class="fontSize26 primColor">{{ data.job }}</span>
-          <span  class="redColor">{{data.money}}<span> /年薪范围</span></span>
+          <span  class="redColor">
+            <span  class="fontSize20"> {{ data.money }}</span>
+            <span> /年薪范围</span>
+          </span>
         </a-col>
         <a-col class="info">
           <span>

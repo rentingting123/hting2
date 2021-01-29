@@ -1,70 +1,165 @@
 <template>
-  <a-card :bordered="false" class="cardBox">
-    <div>
-      <Title title='职位详情' type='1'></Title>
-      <a-row class="detailsposition">
-        <a-col>
-          <span class="fontSize26 primColor">{{ data.job }}</span>
-          <span  class="redColor">{{data.money}}<span> /年薪范围</span></span>
-        </a-col>
-        <a-col class="info">
-          <span>
-            <div class="iconbg"><i class="iconfont">&#xe646;</i></div>
-            {{data.job}}
-          </span>
-          <span>
-            <div class="iconbg"><i class="iconfont">&#xe647;</i></div>
-            {{data.year}}
-          </span>
-          <span>
-            <div class="iconbg"><i class="iconfont">&#xe611;</i></div>
-            {{data.school}}
-          </span>
-        </a-col>
-        <a-col v-html="data.other"></a-col>
-      </a-row>
-    </div>
-    <div class="marginB">
-      <Title title='岗位职责'></Title>
-      <div v-html="data.responsibilities" class="contentText">
+  <div>
+    <a-card :bordered="false" class="cardBox">
+      <div>
+        <Title title='公司详情' type='1'></Title>
+        <div class="company">
+          <img class="img" :src="data.company.img" alt="">
+          <div class="infobox">
+            <div  class="fontSize26 redColor">{{data.company.name}}</div>
+            <div class="info">
+              <div>{{data.company.address}} {{data.company.people}} {{data.company.status}}</div>
+              <div class="primColor">联系人：{{data.company.contact}}</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="marginB">
-      <Title title='任职要求'></Title>
-      <div v-html="data.responsibilities" class="contentText">
+      <div>
+        <Title title='联系人'></Title>
+        <div class="contactbg">
+          <a-row v-for="(item ,index) in data.contact" :key="index" class="arow">
+            <a-col :lg="7" :md="12" :sm="24">
+              <span>{{ item.name }}</span>
+              <span class="primColor"> /{{item.job}}</span>
+            </a-col>
+            <a-col :lg="7" :md="12" :sm="24">
+              <div class="iconbg"><i class="iconfont">&#xe660;</i></div>
+              {{ item.tel }}
+            </a-col>
+            <a-col :lg="10" :md="12" :sm="24">
+              <div class="iconbg"><i class="iconfont">&#xe605;</i></div>
+              {{ item.eail }}
+            </a-col>
+          </a-row>
+        </div>
       </div>
-    </div>
-    <div class="marginB">
-      <Title title='任职要求'></Title>
-      <div v-html="data.responsibilities" class="contentText">
+      <div class="marginB">
+        <Title title='其它职位'></Title>
+        <div class="contactbg1">
+          <a-row v-for="(item ,index) in data.otherJob" :key="index" class="arow">
+            <a-col>
+              <span class="primColor">{{ item.name }}</span>
+              <span> （{{item.introduce}}）</span>
+            </a-col>
+          </a-row>
+        </div>
       </div>
-    </div>
-	</a-card>
+      <div class="marginB">
+        <Title title='公司介绍'></Title>
+        <div class="contactbg1">
+          {{ data.introduce }}
+        </div>
+      </div>
+      <div>
+        <Title title='高管介绍'></Title>
+        <div class="contactbg1">
+          <div class="senior" v-for="(item ,index) in data.senior" :key="index">
+            <div class="seniorinfo">
+              <span class="fontSize20">{{ item.name }}</span>
+              <span class="primColor"> / {{item.job}}</span>  
+            </div>
+            <div>{{item.content}}</div>
+          </div>
+        </div>
+      </div>
+    </a-card>
+    <a-card :bordered="false" class="cardBox">
+      <a-textarea rows="4" placeholder="请输入文字" v-model="communicate"></a-textarea>
+      <div class="addbtn">
+        <a-button type="danger" @click="addCommunicate" >添加</a-button>
+      </div>
+      <a-radio-group
+        v-model="mode"
+        default-value="1"
+        button-style="solid">
+        <a-radio-button :value="1">
+          我的沟通记录
+        </a-radio-button>
+        <a-radio-button :value="2">
+          全部沟通记录
+        </a-radio-button>
+      </a-radio-group>
+      <div class="communicate">
+        <div v-for="(item,index) in communicateList" :key="index" class="contactbg1">
+          <div class="commuitinfo">
+            <span class="name">{{ item.name }}</span>
+            <span class="time">{{ item.time }}</span>
+          </div>
+          <div>{{ item.content}}</div>
+        </div>
+      </div>
+    </a-card>
+  </div>
 </template>
 <script>
 import Title from '@/components/title'
 // import * as IconSelf from '@/assets/icons/index'
 const data =  {
-    responsibilities: `1、架构设计：全面主持公司技术研发与数据平台规划与管理工作，负责整体技术系统（平台、数据库、应用架构、客户端软件等）发展规划、设计与实现；<br/>
-                      2、实施：带领技术团队设计与实现产品的技术架构<br/>
-                      （服务端架构设计、数据结构定义、服务端API定义及实现、客户端架构、系统运维等)，并负责核心代码开发<br/>
-                      3、深度挖掘行业需求，探索产业数据模型和需求，负责数据体系的布局、规划与开发；<br/>
-                      4、保证公司技术和数据产品的安全性，制定技术部门保密方案和计划；<br/>
-                      5、建立规范、高效的部门管理体系并优化完善，实现效率不断提升，完成团队梯队化建设、培养及管理；<br/>
-                      6、结合公司业务，不断完善人工智能与算法布局，提升公司人工智能与算法在大数据的应用场景及落地；`,
-    job: '技术总监CTO',
-    money: '100万-200万',
-    address: '上海市徐汇区云峰路500号',
-    year: '5-10年',
-    school: '本科及以上',
-    other: '所属部门：技术研发部 &nbsp; &nbsp;汇报对象：CEO  &nbsp; &nbsp;下属规模：25人&nbsp; &nbsp; 面试流程：HR-业务部门-CEO'
+  company:{
+    img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170825%2F726d7b65bcaf4f4eaff6eab4ba03db2b.png&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614497618&t=e77cc9ab4eba49840f12865a3840bd30',
+    name: '阿里巴巴',
+    address: '杭州  ',
+    people: '10000人以上',
+    status:'上市',
+    contact:'张三三'
+  },
+  contact:[
+    {
+      name: '张三',
+      job: '技术总监CTO',
+      tel:'13012345678',
+      eail:'13012345678@163.com'
+    },
+    {
+      name: '张三',
+      job: '技术总监CTO',
+      tel: '13012345678',
+      eail: '13012345678@163.com'
+    },
+  ],
+  otherJob:[
+    {
+      name: '新渠道零售运营经理',
+      introduce: 'PM：王五'
+    },
+     {
+      name: '新渠道零售运营经理',
+      introduce: 'PM：白玉 RC：张三/李四'
+    }
+  ],
+  introduce: '公司致力于运用科技创新的成果，用数字化技术，整合现有社会资源，为全社会提供风险管理服务和AI评估系统，整合医疗、养老、自然灾害、人为灾害等一切领域的风险管理，建立一个完整的风险管理标准、数据库和数据评价模型，对风险进行科学的精准定价咨询和投后管理…',
+  senior:[
+    {
+      name: '马云',
+      job:'创始人',
+      content:'马云，男，汉族，中共党员 ，1964年9月10日生于浙江省杭州市，祖籍浙江省嵊州市谷来镇， 阿里巴巴集团主要创始人。'
+    },
+    {
+      name: '马云',
+      job:'创始人',
+      content:'马云，男，汉族，中共党员 ，1964年9月10日生于浙江省杭州市，祖籍浙江省嵊州市谷来镇， 阿里巴巴集团主要创始人。'
+    },
+  ]
+}
+const communicateList = [
+  {
+    name:'张三',
+    time: '2020年1月20日 10:30',
+    content: '电话沟通，专业性较高，暂时没有换工作的计划，准备年后再考虑新机会，只关注创业公司。'
+  },
+  {
+    name:'张三',
+    time: '2020年1月20日 10:30',
+    content: '电话沟通，专业性较高，暂时没有换工作的计划，准备年后再考虑新机会，只关注创业公司。'
   }
-
+];
 export default {
   data() {
     return {
       data,
-      
+      communicate: '', // 沟通记录内容
+      mode: 1,
+      communicateList
     };
   },
   components: {
@@ -84,24 +179,89 @@ export default {
           }, 
         },
       };
+    },
+    addCommunicate(){
+      console.log(this.communicate);
     }
 	}
 };
 </script>
 <style scoped>
-.detailsposition{
+.company {
   width: 100%;
-  height: 160px;
-  background: #F1F7FF;
-  border-radius: 14px;
-  padding: 20px;
-  box-sizing: border-box;
-  color: #435EBE;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
 }
-.detailsposition .info span{
-  margin-right: 12px;
+.company .img{
+  width: 90px;
+  height: 72px;
+  margin-right: 20px;
+}
+.company .infobox{
+  flex: 1;
+}
+.company .info{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+}
+.contactbg{
+  width: 100%;
+  background: #F1F7FF;
+  padding:10px 6px;
+  margin: 20px 0;
+}
+.contactbg1{
+  width: 100%;
+  background: #F1F7FF;
+  margin: 20px 0;
+  padding: 16px 12px;
+}
+.contactbg .arow,.contactbg1 .arow{
+  padding: 8px 0;
+}
+.seniorinfo{
+  margin: 6px;
+}
+.senior{
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 18px; 
+}
+.senior::after{
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 8px;
+	width: 8px;
+	height: 8px;
+	background: #FF0000;
+	border-radius: 50%;
+}
+.addbtn{
+  text-align: center;
+  margin: 10px auto;
+}
+.commuitinfo{
+  display: flex;
+  justify-content: space-between;
+  height: 25px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.commuitinfo .name{
+  font-size: 18px;
+  font-weight: 500;
+  color: #282828;
+}
+.commuitinfo .time{
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #666666;
 }
 </style>
