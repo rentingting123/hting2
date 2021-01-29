@@ -61,6 +61,9 @@
 .grayColor {
   color: #999999;
 }
+.fontSize20 {
+  font-size: 20px;
+}
 .fontSize26 {
   font-size: 26px;
 }
@@ -111,4 +114,18 @@
   text-align: center;
   line-height: 16px;
   display: inline-block;
+}
+.ant-radio-group {
+  border-radius: 10px ;
+}
+.ant-radio-button-wrapper:first-child {
+  border-left: 1px solid #435EBE;
+}
+.ant-radio-button-wrapper {
+  border: 1px solid #435EBE;
+}
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+  background: #435EBE;
+  border-color: #435EBE;
 }
