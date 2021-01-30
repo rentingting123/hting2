@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import RankList from './RankList';
+import RankList from './components/RankList';
 
 const rankListdata = []
 for (let i = 0; i < 5; i++) {
