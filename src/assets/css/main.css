@@ -61,6 +61,9 @@
 .grayColor {
   color: #999999;
 }
+.greenColor {
+  color: #56C8E9;
+}
 .fontSize20 {
   font-size: 20px;
 }
@@ -79,6 +82,11 @@
 .fromItem1 {
   float: right;
   width: 180px;
+  text-align: right;
+}
+.fromItem2 {
+  float: right;
+  width: 380px;
   text-align: right;
 }
 .cardBox {

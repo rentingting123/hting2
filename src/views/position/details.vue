@@ -103,9 +103,8 @@ export default {
 		detailsPL,
 		detailsPR
 	},
-	//方法集合
 	methods: {
-		//按钮切换
+		// 按钮切换
 		btnChange(i){
 			this.showBtn = i
 		}
