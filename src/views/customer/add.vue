@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import infoForm from './infoForm'
+import infoForm from './components/infoForm'
 import Title from '@/components/title'
-import business from './addBusiness'
-import addManagement from './addManagement'
-import addWelfare from './addWelfare'
+import business from './components/addBusiness'
+import addManagement from './components/addManagement'
+import addWelfare from './components/addWelfare'
 export default {
 	data() {
 		//这里存放数据

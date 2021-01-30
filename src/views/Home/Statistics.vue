@@ -147,16 +147,7 @@ export default {
     height: 360px;
     /* background: turquoise; */
 }
-.ant-radio-group{
-	
-	border-radius: 10px ;
-}
-.ant-radio-button-wrapper:first-child{
-	border-left: 1px solid #435EBE;
-}
-.ant-radio-button-wrapper{
-	border: 1px solid #435EBE;
-}
+
 .cardbox{
 	background: #fff;
 	display: flex;

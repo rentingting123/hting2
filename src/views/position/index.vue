@@ -33,8 +33,10 @@
           <a-select-option value="2">运行中</a-select-option>
         </a-select>
       </a-form-item>
-      <a-form-item style="width:90px">
+      <a-form-item style="width:70px">
         <a-button class="primarybtn">本周进度</a-button>
+      </a-form-item>
+      <a-form-item style="width:70px">
         <a-button class="marginleft">上周进度</a-button>
       </a-form-item>
       <a-form-item class="fromItem1">

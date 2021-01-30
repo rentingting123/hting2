@@ -29,7 +29,7 @@ export const pageRouter = [
     component: Home,
     meta: {
       title: '首页',
-      icon: 'line-chart'
+      icon: '&#xe660;'
     },
   },
   {
