@@ -15,7 +15,7 @@
 <script>
 import moment from 'moment'
 import {dictPage} from "@/api/Interface";
-import AgentNewsList from "./AgentNewsList"
+import AgentNewsList from "./components/AgentNewsList"
 export default {
 	data() {
 		//这里存放数据
