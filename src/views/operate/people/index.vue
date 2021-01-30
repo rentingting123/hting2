@@ -24,14 +24,14 @@
         <a-button type="danger" class="danger-from-button marginleft">搜索</a-button>
       </a-form-item>
       <a-form-item class="fromItem2">
-        <a-button  class="clear-from-button1">
+        <a-button  class="clear-from-button1" @click="addEditModal(1)">
 					<a-icon type="plus-circle" theme="filled" />
 					添加部门
 				</a-button>
 				<a-button  class="clear-from-button1 marginleft">
-					<a-icon type="edit" theme="filled" />
+					<a-icon type="edit" theme="filled" @click="addEditModal(2)"/>
 					编辑部门</a-button>
-				<a-button  class="clear-from-button1 marginleft">
+				<a-button  class="clear-from-button1 marginleft" @click="addEditModal(3)">
 					<a-icon type="plus-circle" theme="filled" />
 					添加人员
 				</a-button>
@@ -62,11 +62,11 @@
 										placeholder="请输入"
 									/>
 								</a-form-item>
-								<a-form-item :wrapper-col="{ span: 24, offset: 8 }">
+								<a-form-item :wrapper-col="{ span: 24, offset: 10 }">
 									<!-- <a-button class="clear-from-button1" @click="hide">
 										取消
 									</a-button> -->
-									<a-button type="primary"  html-type="submit" class="primarybtn marginleft">
+									<a-button type="primary"  html-type="submit" class="primarybtn btnR">
 										确定
 									</a-button>
 								</a-form-item>
@@ -77,10 +77,16 @@
 				</span>
       </a-table>
     </a-card> 
+	<addEditDepartment :visible='visibleDepartment' @visibleCancel="visibleCancel(1)"/>
+	<addEditPeolple :visible='visiblePeolple' @visibleCancel="visibleCancel(2)"/>
+	
   </div>
 </template>
 
 <script>
+import addEditDepartment from './addEditDepartment'
+import addEditPeolple from './addEditPeolple'
+
 const columns = [
   {
     title: '序号',
@@ -169,7 +175,9 @@ export default {
 			columns,
 			queryParam: {},  // 查询参数
 			formLayout: 'horizontal',
-      form: this.$form.createForm(this, { name: 'coordinated' }),
+			form: this.$form.createForm(this, { name: 'coordinated' }),
+			visibleDepartment: false, //展示添加部门
+			visiblePeolple: false, // 展示添加人员
 			pagination: {
 					showQuickJumper :true,
 					total: 0,
@@ -179,6 +187,10 @@ export default {
 					showTotal: (total) => `共${total}条`
 				},
 		};
+	},
+	components: {
+		addEditDepartment,
+		addEditPeolple
 	},
 	// 方法集合
 	methods: {
@@ -198,7 +210,23 @@ export default {
       this.form.setFieldsValue({
         note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
       });
-		}
+		},
+		// 添加部门
+		addEditModal(i){
+			if(i === 1 || i === 2){
+				this.visibleDepartment = true
+			}else if(i === 3){
+				this.visiblePeolple = true 
+			}
+		},
+		// 挂麻痹部门
+		visibleCancel(i){
+			if(i === 1){
+				this.visibleDepartment = false 
+			}else if(i === 2){
+				this.visiblePeolple = false 
+			}
+		},
 	},
 }
 </script>
