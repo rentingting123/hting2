@@ -40,6 +40,9 @@
   color: white;
   background: #435EBE !important;
 }
+.btnR {
+  border-radius: 16px;
+}
 .ant-table-tbody > tr:nth-child(2n) {
   background: rgba(218, 223, 255, 0.5) !important;
 }
@@ -136,4 +139,27 @@
 .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
   background: #435EBE;
   border-color: #435EBE;
+}
+.ant-modal-header {
+  background: #435EBE;
+  text-align: center;
+  color: #fff;
+}
+.ant-modal-title {
+  color: #fff;
+}
+.ant-modal-close {
+  color: rgba(255, 255, 255, 0.75);
+}
+.ant-modal-close:focus,
+.ant-modal-close:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+.ant-modal-footer {
+  text-align: center;
+  border-top: none;
+}
+.textAC {
+  text-align: center;
 }
