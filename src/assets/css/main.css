@@ -140,6 +140,24 @@
   background: #435EBE;
   border-color: #435EBE;
 }
+.Radiogroup {
+  width: 100%;
+}
+.rowRadioStyle {
+  height: 50px;
+}
+.RadioOption {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 14px;
+}
+.radioStyle {
+  color: #333333;
+}
+.radioStyle.ant-radio-wrapper-checked {
+  color: #435EBE !important;
+}
 .ant-modal-header {
   background: #435EBE;
   text-align: center;

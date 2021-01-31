@@ -23,20 +23,25 @@
 			</a-button>
 		</div>
     <people v-if="showBtn === 1"/>
+    <industry v-if="showBtn === 2"/>
+    <station v-if="showBtn === 3"/>
   </div>
 </template>
 
 <script>
 import people from './people'
-
+import industry from './industry'
+import station from './station'
 export default {
   name: 'TableList',
   components: {
-    people
+    people,
+    industry,
+    station
   },
   data () {
     return {
-      showBtn: 1, 
+      showBtn: 2, 
     }
   },
   methods: {
