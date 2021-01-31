@@ -122,7 +122,7 @@ const columns = [
     title: '年度目标',
     key: 'comncont',
     dataIndex: 'comncont',
-    width: 300
+    // width: 300
   },
   {
     title: '回款',
