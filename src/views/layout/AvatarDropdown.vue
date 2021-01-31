@@ -17,7 +17,7 @@
       </a-menu>
     </a-dropdown>
     <span class="ant-pro-account-avatar">
-      <a-avatar size="small" src="https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png" class="antd-pro-global-header-index-avatar" />
+      <a-avatar size="small" :src="logoq" class="antd-pro-global-header-index-avatar" />
       <span class="name">{{ name }} / 猎头顾问-AC2</span>
     </span>
     <div  @click="handleLogout" class="exitbtn">
@@ -29,12 +29,17 @@
 
 <script>
 import { Modal } from 'ant-design-vue'
-
+import logoq from '@/assets/img/logoq.png'
+import logom from '@/assets/img/logom.png'
+import logof from '@/assets/img/logof.png'
 export default {
   name: 'AvatarDropdown',
    data () {
     return {
-      name: '超级管理员'
+      name: '超级管理员',
+      logoq,
+      logom,
+      logof
     }
   },
   methods: {
@@ -73,7 +78,7 @@ export default {
 .antd-pro-global-header-index-avatar{
    width: 40px;
   height: 40px;
-  background: #206BFF;
+  // background: #206BFF;
 }
 .ant-pro-drop-down {
   /deep/ .action {
