@@ -10,6 +10,7 @@ import resume from '@/views/resume'
 // 客户管理
 import customer from '@/views/customer'
 import customerAdd from '@/views/customer/add'
+import customerDetails from '@/views/customer/details'
 
 import operate from '@/views/operate'
 import myInfo from '@/views/myInfo'
@@ -78,6 +79,17 @@ export const pageRouter = [
     hidden: true,
     meta: {
       title: '添加客户',
+    },
+  },
+  {
+    path: '/customerDetails',
+    name: 'customerDetails',
+    component: customerDetails,
+    hidden: true,
+    meta: {
+      title: '客户详情',
+      icon: 'file-protect',
+      hideChildrenInMenu: true,
     },
   },
   {

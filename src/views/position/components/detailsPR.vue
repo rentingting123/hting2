@@ -209,39 +209,12 @@ export default {
   font-size: 16px;
   font-weight: 500;
 }
-.contactbg{
-  width: 100%;
-  background: #F1F7FF;
-  padding:10px 6px;
-  margin: 20px 0;
-}
-.contactbg1{
-  width: 100%;
-  background: #F1F7FF;
-  margin: 20px 0;
-  padding: 16px 12px;
-}
-.contactbg .arow,.contactbg1 .arow{
-  padding: 8px 0;
-}
+
+
 .seniorinfo{
   margin: 6px;
 }
-.senior{
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 18px; 
-}
-.senior::after{
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 8px;
-	width: 8px;
-	height: 8px;
-	background: #FF0000;
-	border-radius: 50%;
-}
+
 .addbtn{
   text-align: center;
   margin: 10px auto;

@@ -74,17 +74,16 @@
   font-size: 26px;
 }
 .searchForm {
-  padding: 20px !important;
+  padding: 14px !important;
   background: #FFFFFF;
   box-shadow: 0px 0px 14px 0px rgba(218, 223, 255, 0.88);
   border-radius: 14px;
+  margin-bottom: 18px;
 }
 .fromItem {
   width: 160px;
 }
 .fromItem1 {
-  float: right;
-  width: 180px;
   text-align: right;
 }
 .fromItem2 {
@@ -95,15 +94,19 @@
 .cardBox {
   box-shadow: 0px 0px 14px 0px rgba(218, 223, 255, 0.88);
   border-radius: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 .titlebox > span {
   color: #435EBE;
   margin-right: 20px;
 }
+.marginr {
+  margin-right: 8px;
+}
 .flexSpace {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .marginTB {
   margin: 20px 0;
@@ -180,4 +183,49 @@
 }
 .textAC {
   text-align: center;
+}
+.contactbg {
+  width: 100%;
+  background: #F1F7FF;
+  padding: 10px 6px;
+  margin: 20px 0;
+}
+.contactbg1 {
+  width: 100%;
+  background: #F1F7FF;
+  margin: 20px 0;
+  padding: 16px 12px;
+}
+.contactbg .arow,
+.contactbg1 .arow {
+  padding: 8px 0;
+}
+.senior {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 18px;
+}
+.senior::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  background: #FF0000;
+  border-radius: 50%;
+}
+.imglist {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.imglist .imgitem {
+  width: 70px;
+  height: 70px;
+  background: #FAFAFA;
+  border-radius: 8px;
+  border: 1px solid #DEDEDE;
+  margin-right: 6px;
+  margin-top: 6px;
 }

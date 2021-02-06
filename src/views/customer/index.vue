@@ -2,14 +2,9 @@
   <div>
     <a-form layout="inline">
       <a-row class="addTitle">
-        <a-col :md="12">
-          <a-select v-model="queryParam.useStatus" placeholder="我负责的客户" class="slelectbox" default-value="0"  style="width:200px">
-            <a-select-option value="0">全部</a-select-option>
-            <a-select-option value="1">关闭</a-select-option>
-            <a-select-option value="2">运行中</a-select-option>
-          </a-select>
-        </a-col>
-        <a-col :md="12" style="text-align:right">
+        <!-- <a-col :md="12">
+        </a-col> -->
+        <a-col :md="24" style="text-align:right">
           <router-link :to="{name:'customerAdd'}">
             <a-button type="danger" class="danger-from-button">
               <a-icon type="plus-circle" theme="filled" />添加客户
@@ -19,8 +14,12 @@
       </a-row>
     </a-form>
      <a-form layout="inline" class="searchForm fromMargin">
-      <a-form-item class="fromItem">
-        <a-input v-model="queryParam.positionName" placeholder="请输入企业名称" allowClear />
+        <a-form-item class="fromItem">
+        <a-select v-model="queryParam.useStatus" placeholder="我维护的客户" class="slelectbox" default-value="0"  style="width:160px">
+          <a-select-option value="0">全部</a-select-option>
+          <a-select-option value="1">关闭</a-select-option>
+          <a-select-option value="2">运行中</a-select-option>
+        </a-select>
       </a-form-item>
       <a-form-item class="fromItem">
         <a-select v-model="queryParam.status" placeholder="请选择行业" default-value="0" allowClear style="width:160px">
@@ -30,40 +29,37 @@
         </a-select>
       </a-form-item>
       <a-form-item class="fromItem">
-        <a-select v-model="queryParam.status0" placeholder="请选择招聘状态" default-value="0" allowClear style="width:160px">
+        <a-select v-model="queryParam.status0" placeholder="企业规模" default-value="0" allowClear style="width:160px">
           <a-select-option value="0">全部</a-select-option>
           <a-select-option value="1">关闭</a-select-option>
           <a-select-option value="2">运行中</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item class="fromItem">
-        <a-select v-model="queryParam.status1" placeholder="请选择企业规模" default-value="0" allowClear style="width:160px">
+        <a-select v-model="queryParam.status2" placeholder="融资状况" default-value="0" allowClear style="width:160px">
           <a-select-option value="0">全部</a-select-option>
           <a-select-option value="1">关闭</a-select-option>
           <a-select-option value="2">运行中</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item class="fromItem">
-        <a-select v-model="queryParam.status2" placeholder="请选择融资情况" default-value="0" allowClear style="width:160px">
-          <a-select-option value="0">全部</a-select-option>
-          <a-select-option value="1">关闭</a-select-option>
-          <a-select-option value="2">运行中</a-select-option>
-        </a-select>
+        <a-input v-model="queryParam.positionName" placeholder="请输入企业名称" allowClear />
       </a-form-item>
       <a-form-item class="fromItem1">
-        <a-button  class="clear-from-button1">清除</a-button>
         <a-button type="primary" class="danger-from-button1 marginleft">搜索</a-button>
       </a-form-item>
     </a-form>
     <a-card :bordered="false">
-      <a-table :columns="columns" :data-source="data" :pagination="pagination" @change="handlePagination">
-        <div slot="name" slot-scope="text">
-          <span class="primColor">{{ text }}</span>
+      <a-table
+        :columns="columns"
+        :data-source="data"
+        :pagination="pagination"
+        @change="handlePagination">
+        <div slot="name" slot-scope="text,record" @click="customRow(record)">
+          <a class="primColor">{{ text }}</a>
         </div>
-        <span slot="status" slot-scope="text">
-          <span :class="text === 1 ? 'primColor' : text === 2 ? 'yellowColor' : text === 3 ? 'grayColor':''">
-            {{text === 1 ? '运作中' : text === 2 ? '已交付' : text === 3 ? '已结束':''}}
-          </span>
+        <span slot="position" slot-scope="text">
+          <span class="primColor">{{text}}</span>
         </span>
       </a-table>
     </a-card> 
@@ -84,15 +80,15 @@ const columns = [
     key: 'hangye',
   },
   {
-    title: '招聘状态',
+    title: '企业规模',
     dataIndex: 'status',
     key: 'status',
-    scopedSlots: { customRender: 'status' },
   },
   {
     title: '在招职位',
     key: 'position',
     dataIndex: 'position',
+     scopedSlots: { customRender: 'position' },
   },
   {
     title: '维护人',
@@ -116,7 +112,7 @@ const data = [
     key: '1',
     name: '百度网络',
     hangye: 'IT互联网',
-    status: 1,
+    status: '100人以上',
     position:'运营总监/技术总监',
     people: '张三',
     comncont: '职位暂停目前不需要人了， 有需要再联系,职位暂停目前不需要人了，职位暂停目前不需要人了，职位暂停目前不需要人了，职位暂停目前不需要人了，',
@@ -126,7 +122,7 @@ const data = [
     key: '2',
     name: '百度网络',
     hangye: 'IT互联网',
-    status: 2,
+    status: '100人以上',
     position:'运营总监/技术总监',
     people: '张三',
     comncont: '职位暂停目前不需要人了， 有需要再联系',
@@ -136,7 +132,7 @@ const data = [
     key: '3',
     name: '百度网络',
     hangye: 'IT互联网',
-    status: 3,
+    status: '100人以上',
     position:'运营总监/技术总监',
     people: '张三',
     comncont: '职位暂停目前不需要人了， 有需要再联系',
@@ -171,6 +167,10 @@ export default {
     handlePagination(pagination){
       console.log(pagination.current);
     },
+    customRow(record){
+      console.log(record);
+      this.$router.push({path:'/customerDetails'});
+    }
   }
 }
 </script>
