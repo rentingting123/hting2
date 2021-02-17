@@ -21,6 +21,13 @@
 				@click="btnChange(3)">
 				岗位列表
 			</a-button>
+      <a-button
+				:type="showBtn === 4?'primary':''"
+				:class="showBtn === 4?'primarybtn':'' "
+				class="marginleft"
+				@click="btnChange(4)">
+				组织架构
+			</a-button>
 		</div>
     <people v-if="showBtn === 1"/>
     <industry v-if="showBtn === 2"/>

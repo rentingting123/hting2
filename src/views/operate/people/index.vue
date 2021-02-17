@@ -20,18 +20,17 @@
         <a-input v-model="queryParam.positionName" placeholder="请输入姓名" allowClear />
       </a-form-item>
 			<a-form-item class="fromItem">
-        <a-button  class="clear-from-button">清除</a-button>
-        <a-button type="danger" class="danger-from-button marginleft">搜索</a-button>
+        <a-button type="danger" class="danger-from-button">搜索</a-button>
       </a-form-item>
       <a-form-item class="fromItem2">
-        <a-button  class="clear-from-button1" @click="addEditModal(1)">
+        <!-- <a-button  class="clear-from-button1" @click="addEditModal(1)">
 					<a-icon type="plus-circle" theme="filled" />
 					添加部门
 				</a-button>
 				<a-button  class="clear-from-button1 marginleft">
 					<a-icon type="edit" theme="filled" @click="addEditModal(2)"/>
-					编辑部门</a-button>
-				<a-button  class="clear-from-button1 marginleft" @click="addEditModal(3)">
+					编辑部门</a-button> -->
+				<a-button type="primary" class="primarybtn" @click="addEditModal(3)">
 					<a-icon type="plus-circle" theme="filled" />
 					添加人员
 				</a-button>
@@ -40,40 +39,10 @@
     <a-card :bordered="false">
       <a-table :columns="columns" :data-source="data" :pagination="pagination" @change="handlePagination">
 				<span slot="action" >
+          <a-switch default-checked @change="onChange" />
 					<a-button type='link' class="primColor" size="small">编辑</a-button>
 					<a-button type='link' class="redColor" size="small">删除</a-button>
-					<a-popover placement="bottomRight">
-						<template slot="content">
-							<a-form
-							:form="form"
-							:label-col="{ span: 10 }" :wrapper-col="{ span: 14 }" @submit="handleSubmit"
-							:hideRequiredMark="true"
-							:colon='false'
-							>
-								<a-form-item label="年度目标">
-									<a-input
-										v-decorator="['note', { rules: [{ required: true, message: '请输入年度目标' }] }]"
-										placeholder="请输入"
-									/>
-								</a-form-item>
-								<a-form-item label="回 款 数">
-									<a-input
-										v-decorator="['number', { rules: [{ required: true, message: '请输入回款数' }] }]"
-										placeholder="请输入"
-									/>
-								</a-form-item>
-								<a-form-item :wrapper-col="{ span: 24, offset: 10 }">
-									<!-- <a-button class="clear-from-button1" @click="hide">
-										取消
-									</a-button> -->
-									<a-button type="primary"  html-type="submit" class="primarybtn btnR">
-										确定
-									</a-button>
-								</a-form-item>
-							</a-form>
-						</template>
-							<a-button type='link' class="greenColor" size="small">设置</a-button>
-					</a-popover>
+          <a-button type='link' class="greenColor" size="small">回款</a-button>
 				</span>
       </a-table>
     </a-card> 
@@ -227,6 +196,10 @@ export default {
 				this.visiblePeolple = false 
 			}
 		},
+    // 改变
+    onChange(checked) {
+      console.log(`a-switch to ${checked}`);
+    },
 	},
 }
 </script>
