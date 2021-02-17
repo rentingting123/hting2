@@ -30,7 +30,7 @@
 				<a-button  class="clear-from-button1 marginleft">
 					<a-icon type="edit" theme="filled" @click="addEditModal(2)"/>
 					编辑部门</a-button> -->
-				<a-button type="primary" class="primarybtn" @click="addEditModal(3)">
+				<a-button type="primary" class="primarybtn" @click="addEditModal(1)">
 					<a-icon type="plus-circle" theme="filled" />
 					添加人员
 				</a-button>
@@ -38,24 +38,25 @@
     </a-form>
     <a-card :bordered="false">
       <a-table :columns="columns" :data-source="data" :pagination="pagination" @change="handlePagination">
-				<span slot="action" >
+				<span slot="action" slot-scope="text,record">
           <a-switch default-checked @change="onChange" />
 					<a-button type='link' class="primColor" size="small">编辑</a-button>
 					<a-button type='link' class="redColor" size="small">删除</a-button>
-          <a-button type='link' class="greenColor" size="small">回款</a-button>
+          <a-button type='link' class="greenColor" size="small"
+           @click="addEditModal(2,record.id)">回款</a-button>
 				</span>
       </a-table>
     </a-card> 
-	<addEditDepartment :visible='visibleDepartment' @visibleCancel="visibleCancel(1)"/>
-	<addEditPeolple :visible='visiblePeolple' @visibleCancel="visibleCancel(2)"/>
-	
+	<!-- <addEditDepartment :visible='visibleDepartment' @visibleCancel="visibleCancel(1)"/> -->
+	<addEditPeolple :visible='visiblePeolple' @visibleCancel="visibleCancel(1)"/>
+	<returnMoney :visible='visibleReturnMoney' :returnMoneyId='returnMoneyId'  @visibleCancel="visibleCancel(2)"/>
   </div>
 </template>
 
 <script>
-import addEditDepartment from './addEditDepartment'
+// import addEditDepartment from './addEditDepartment'
 import addEditPeolple from './addEditPeolple'
-
+import returnMoney from './returnMoney'
 const columns = [
   {
     title: '序号',
@@ -68,7 +69,7 @@ const columns = [
     key: 'name',
   },
   {
-    title: '联系方式',
+    title: '电话',
     dataIndex: 'hangye',
     key: 'hangye',
   },
@@ -78,7 +79,12 @@ const columns = [
     key: 'status'
   },
   {
-    title: '小组',
+    title: '职级',
+    key: 'position',
+    dataIndex: 'position',
+  },
+  {
+    title: '职位',
     key: 'position',
     dataIndex: 'position',
   },
@@ -94,7 +100,7 @@ const columns = [
     // width: 300
   },
   {
-    title: '回款',
+    title: '回款金额',
     key: 'time',
     dataIndex: 'time'
 	},
@@ -145,8 +151,9 @@ export default {
 			queryParam: {},  // 查询参数
 			formLayout: 'horizontal',
 			form: this.$form.createForm(this, { name: 'coordinated' }),
-			visibleDepartment: false, //展示添加部门
 			visiblePeolple: false, // 展示添加人员
+      visibleReturnMoney: false, // 展示回款
+      returnMoneyId: '', // 回款id
 			pagination: {
 					showQuickJumper :true,
 					total: 0,
@@ -158,8 +165,9 @@ export default {
 		};
 	},
 	components: {
-		addEditDepartment,
-		addEditPeolple
+		// addEditDepartment,
+		addEditPeolple,
+    returnMoney
 	},
 	// 方法集合
 	methods: {
@@ -181,20 +189,25 @@ export default {
       });
 		},
 		// 添加部门
-		addEditModal(i){
-			if(i === 1 || i === 2){
-				this.visibleDepartment = true
-			}else if(i === 3){
-				this.visiblePeolple = true 
+		addEditModal(i,id){
+			if(i === 1){
+        // 添加人员
+				this.visiblePeolple = true
+			}else if(i === 2){
+        // 回款
+				this.visibleReturnMoney = true
+        this.returnMoneyId = id
 			}
 		},
-		// 挂麻痹部门
+		// 关闭弹框
 		visibleCancel(i){
-			if(i === 1){
-				this.visibleDepartment = false 
-			}else if(i === 2){
+      if(i === 1){
+        // 添加人员
 				this.visiblePeolple = false 
-			}
+			}else if(i === 2){
+        // 回款
+        this.visibleReturnMoney = false 
+      }
 		},
     // 改变
     onChange(checked) {
