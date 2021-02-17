@@ -23,13 +23,6 @@
         <a-button type="danger" class="danger-from-button">搜索</a-button>
       </a-form-item>
       <a-form-item class="fromItem2">
-        <!-- <a-button  class="clear-from-button1" @click="addEditModal(1)">
-					<a-icon type="plus-circle" theme="filled" />
-					添加部门
-				</a-button>
-				<a-button  class="clear-from-button1 marginleft">
-					<a-icon type="edit" theme="filled" @click="addEditModal(2)"/>
-					编辑部门</a-button> -->
 				<a-button type="primary" class="primarybtn" @click="addEditModal(1)">
 					<a-icon type="plus-circle" theme="filled" />
 					添加人员
@@ -47,14 +40,12 @@
 				</span>
       </a-table>
     </a-card> 
-	<!-- <addEditDepartment :visible='visibleDepartment' @visibleCancel="visibleCancel(1)"/> -->
 	<addEditPeolple :visible='visiblePeolple' @visibleCancel="visibleCancel(1)"/>
 	<returnMoney :visible='visibleReturnMoney' :returnMoneyId='returnMoneyId'  @visibleCancel="visibleCancel(2)"/>
   </div>
 </template>
 
 <script>
-// import addEditDepartment from './addEditDepartment'
 import addEditPeolple from './addEditPeolple'
 import returnMoney from './returnMoney'
 const columns = [
@@ -165,7 +156,6 @@ export default {
 		};
 	},
 	components: {
-		// addEditDepartment,
 		addEditPeolple,
     returnMoney
 	},
@@ -217,6 +207,5 @@ export default {
 }
 </script>
 <style scoped>
-/* @import url(); 引入公共css类 */
 
 </style>

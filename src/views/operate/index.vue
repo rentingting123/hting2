@@ -32,6 +32,7 @@
     <people v-if="showBtn === 1"/>
     <industry v-if="showBtn === 2"/>
     <station v-if="showBtn === 3"/>
+    <organizational v-if="showBtn === 4"/>
   </div>
 </template>
 
@@ -39,16 +40,19 @@
 import people from './people'
 import industry from './industry'
 import station from './station'
+import organizational from './organizational'
+
 export default {
   name: 'TableList',
   components: {
-    people,
-    industry,
-    station
+    people, // 人员列表
+    industry, // 行业列表
+    station, // 岗位
+    organizational //组织架构
   },
   data () {
     return {
-      showBtn: 1, 
+      showBtn: 4, 
     }
   },
   methods: {
