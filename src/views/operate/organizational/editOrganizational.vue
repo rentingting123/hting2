@@ -6,13 +6,11 @@
 			on-ok="handleOk"
 			@cancel="handleCancel"
 			:footer="null"
+      width="50%"
 			>
 		<template slot="closeIcon">
 			<a-icon type="close-circle" theme="filled" @click="handleCancel"/>
 		</template>
-    <!-- layout="horizontal"
-			:label-col="formLayout.labelCol"
-      :wrapper-col="formLayout.wrapperCol" -->
     <a-form	layout="inline">
       <div class="primColor ">部门设置</div>
 			<a-form-item label="部门名称">
@@ -39,7 +37,14 @@
         </a-select>
       </a-form-item>
       <div class="primColor marginTop">部门成员</div>
-
+      <a-row type="flex" justify="space-between">
+        <a-col :span="4" v-for="item in chengyuanData" :key="item.id" class="chengyuan">
+          <div class="cytitle">{{ item.name }}</div>
+          <div v-for="(item1, index) in item.nameList" :key="index">
+            {{ item1 }}
+          </div>
+        </a-col>
+      </a-row>
     </a-form>
     </a-modal>
   </div>
@@ -53,6 +58,28 @@ const formTailLayout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 14, offset: 4 },
 };
+const chengyuanData = [
+  {
+    id: 1,
+    name: '金融02小组',
+    nameList: ['张三三','李四','王五','赵六']
+  },
+  {
+    id: 2,
+    name: '金融02小组',
+    nameList: ['张三三','李四','王五','赵六']
+  },
+  {
+    id: 3,
+    name: '金融02小组',
+    nameList: ['张三三','李四','王五','赵六']
+  },
+  {
+    id: 4,
+    name: '金融02小组',
+    nameList: ['张三三','李四','王五','赵六']
+  },
+]
 export default {
   data() {
     return {
@@ -62,6 +89,7 @@ export default {
 			formTailLayout,
 			queryParam:{},
 			juese: 1,
+      chengyuanData
     };
   },
   props:['visible'],
@@ -101,5 +129,20 @@ export default {
     align-items: center;
     justify-content: space-between;
     margin: 14px 0 0;
+  }
+  .chengyuan{
+    min-width: 100px;
+    text-align: center;
+    background: #F9FAFB;
+    border-radius: 8px;
+    margin-top: 16px;
+    line-height: 30px;
+  }
+  .cytitle{
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    background: #435EBE;
+    border-radius: 8px 8px 0px 0px;
   }
 </style>

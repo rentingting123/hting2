@@ -2,8 +2,6 @@
   <div>
     <a-form layout="inline">
       <a-row class="addTitle">
-        <!-- <a-col :md="12">
-        </a-col> -->
         <a-col :md="24" style="text-align:right">
           <router-link :to="{name:'customerAdd'}">
             <a-button type="danger" class="danger-from-button">

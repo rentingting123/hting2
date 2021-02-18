@@ -24,7 +24,7 @@
         </div>
 			</div>
 			<div>
-        <a-button type="primary" class="danger-from-button1" @click="editData(item.id)">
+        <a-button type="primary" class="danger-from-button1" @click="editData()">
 					<a-icon type="edit" />
 					编辑
 				</a-button>
@@ -53,6 +53,7 @@
 				<detailsContact class="height466" />
 			</a-col>
 		</a-row>
+		<addEditBusContacts :visible='visible'  @visibleCancel="visibleCancel()"></addEditBusContacts>
 	</div>
 </template>
 
@@ -62,6 +63,7 @@ import detailsPosition from './components/detailsPosition'
 import detailsCooperation from './components/detailsCooperation'
 import detailsRecord from './components/detailsRecord'
 import detailsContact from './components/detailsContact'
+import addEditBusContacts from './addEditBusContacts'
 
 const data =  {
   company:{
@@ -114,7 +116,8 @@ export default {
 	data() {
 		return {
 			data,
-			showBtn: 1
+			showBtn: 1,
+			visible: false
 		};
 	},
 	components:{
@@ -122,12 +125,20 @@ export default {
 		detailsPosition,
 		detailsCooperation,
 		detailsRecord,
-		detailsContact
+		detailsContact,
+		addEditBusContacts
 	},
 	methods: {
 		// 按钮切换
 		btnChange(i){
 			this.showBtn = i
+		},
+		editData(id){
+			console.log(id);
+			this.visible = true;
+		},
+		visibleCancel(){
+			this.visible = false
 		}
 	},
 	//生命周期 - 创建完成（可以访问当前this实例）
