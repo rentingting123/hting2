@@ -1,51 +1,19 @@
 <template>
 <div>
-  <a-form-model
-    ref="dynamicValidateForm"
-    :model="form"
-    layout="inline">
-    <a-form-model-item label="姓名">
-      <a-input v-model="form.name" placeholder="请输入姓名" class="iptName" />
-    </a-form-model-item>
-    <a-form-model-item label="职位">
-      <a-input v-model="form.position" placeholder="请输入职位" class="iptName"/>
-    </a-form-model-item>
-    <a-form-model-item label="描述">
-      <a-input v-model="form.tel" placeholder="请输入描述" class="iptName"/>
-    </a-form-model-item>
-    <a-form-model-item label="相册">
-       <a-upload
-        name="avatar"
-        list-type="picture-card"
-        class="avatar-uploader"
-        :show-upload-list="false"
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        :before-upload="beforeUpload"
-        @change="handleChange"
-        >
+  <a-upload
+    name="avatar"
+    list-type="picture-card"
+    class="avatar-uploader"
+    :show-upload-list="false"
+    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+    :before-upload="beforeUpload"
+    @change="handleChange"
+    >
     <img v-if="imageUrl" :src="imageUrl" alt="avatar" />
     <div v-else>
       <a-icon :type="loading ? 'loading' : 'plus'" />
     </div>
   </a-upload>
-    </a-form-model-item>
-    <a-form-model-item >
-      <a-button type="link"  @click="companyPeopleAdd">
-        添加
-      </a-button>
-    </a-form-model-item>
-  </a-form-model>
-  <template v-if="companyList.length>0">
-    <div class="companyList" v-for="(item, index) in companyList" :key="index">
-      <span> 姓名：{{item.name}}</span>
-      <span> 职位：{{item.position}}</span>
-      <span> 描述：{{item.tel}}</span>
-      <span> 相册：{{item.emil}}</span>
-      <a-button type="link"  @click="deleteData(item)">
-        <i class="iconfont redColor" >&#xe614;</i>
-      </a-button>
-    </div>
-  </template> 
 </div>
 </template>
 

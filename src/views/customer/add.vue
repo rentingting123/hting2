@@ -19,12 +19,20 @@
 	</a-card>
 	<a-card :bordered="false" class="cardBox">
 		<Title title='企业相册'></Title>	
-		<!-- <info-form ref="info" :showSubmit="false" /> -->
+		<addImage  :showSubmit="false" />
 	</a-card>
 	<a-card :bordered="false" class="cardBox">
 		<Title title='营业执照'></Title>	
-		<!-- <info-form ref="info" :showSubmit="false" /> -->
+		<addImage :showSubmit="false" />
 	</a-card>
+	<div class="optionbox">
+		<a-button key="back" @click="handleCancel" class="clear-from-button1 btnR">
+			取消
+		</a-button>
+		<a-button key="submit" type="primary" class="primarybtn btnR marginleft" :loading="loading" @click="handleOk">
+			保存 
+		</a-button>
+	</div>
  </div>
 </template>
 
@@ -34,6 +42,8 @@ import Title from '@/components/title'
 import business from './components/addBusiness'
 import addManagement from './components/addManagement'
 import addWelfare from './components/addWelfare'
+import addImage from './components/addImage'
+
 export default {
 	data() {
 		//这里存放数据
@@ -46,7 +56,8 @@ export default {
 		Title,
 		business,
 		addManagement,
-		addWelfare
+		addWelfare,
+		addImage
   },
 //监听属性 类似于data概念
 computed: {},
@@ -67,5 +78,9 @@ mounted() {
 }
 </script>
 <style scoped>
-
+.optionbox{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 </style>
