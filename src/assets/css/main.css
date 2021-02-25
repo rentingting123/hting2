@@ -241,3 +241,7 @@
 .padding20 {
   padding: 20px ;
 }
+.maxHeight {
+  height: 70vh;
+  overflow-y: auto;
+}

@@ -28,6 +28,7 @@
 	</a-modal>
 </template>
 <script>
+import {industryAdd,industryEdit} from "@/api/Interface/operate" //接口
 const formLayout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 14 },
@@ -48,10 +49,13 @@ export default {
 			checkNick: false,
     };
   },
-	props:['visible','type'],
+	props:['visible','type','details'],
 	watch: {
 		type(){
 			this.typeChange()
+		},
+		details(){
+			this.queryParam.name = this.details.name
 		}
 	},
 	mounted(){
@@ -60,28 +64,28 @@ export default {
   methods: {
 		typeChange(){
 			if(this.type === 1){
-				this.Title = '新建一级分类';
+				this.Title = this.details?'修改一级分类':'新建一级分类';
 				this.label = '一级类目名称'
 			}else if(this.type === 2){
-				this.Title = '新建二级分类';
+				this.Title = this.details?'修改二级分类':'新建二级分类';
 				this.label = '二级类目名称'
 			}else if(this.type === 3){
-				this.Title = '新建三级分类';
+				this.Title = this.details?'修改三级分类':'新建三级分类';
 				this.label = '三级类目名称'
 			}else if(this.type === 4){
-				this.Title = '新建四级分类';
+				this.Title = this.details?'修改四级分类':'新建四级分类';
 				this.label = '四级类目名称'
 			}else if(this.type === 5){
-				this.Title = '新建岗位一级分类';
+				this.Title = this.details?'修改岗位一级分类':'新建岗位一级分类';
 				this.label = '一级类目名称'
 			}else if(this.type === 6){
-				this.Title = '新建岗位二级分类';
+				this.Title = this.details?'修改岗位二级分类':'新建岗位二级分类';
 				this.label = '二级类目名称'
 			}else if(this.type === 7){
-				this.Title = '新建岗位三级分类';
+				this.Title = this.details?'修改岗位三级分类':'新建岗位三级分类';
 				this.label = '三级类目名称'
 			}else if(this.type === 8){
-				this.Title = '新建岗位四级分类';
+				this.Title = this.details?'修改岗位四级分类':'新建岗位四级分类';
 				this.label = '四级类目名称'
 			}
 		},
@@ -92,13 +96,49 @@ export default {
         }
       });
     },
-    handleOk() {
+		//提交
+		handleOk() {
+			if(this.details && this.details.id){
+				this.submitEdit();
+			}else{
+				this.submitAdd()
+			}
+		},
+		// 添加
+    submitAdd() {
       this.loading = true;
-      setTimeout(() => {
-        this.$emit('visibleCancel');
-        this.loading = false;
-      }, 3000);
+			let obj = {
+				name: this.queryParam.name,
+				parentId: 0
+			};
+			industryAdd(obj).then(res=>{
+				console.log(res);
+				if(res.data.code === 1 ){
+					this.loading = false;
+					this.$message.success(res.data.message);
+					this.$emit('visibleCancel');
+					// this.getIndustryList(val);
+				}else{
+					this.$message.error(res.data.message);
+				}
+			})
     },
+		// 修改
+		submitEdit(){
+			let obj = {
+				id: this.details.id,
+				name: this.queryParam.name
+			};
+			industryEdit(obj).then(res=>{
+				if(res.data.code === 1 ){
+					this.$message.success(res.data.message);
+					this.$emit('visibleCancel');
+					// this.getIndustryList(val);
+				}else{
+					console.log("修改失败")
+				}
+			})
+		},
     handleCancel() {
       this.$emit('visibleCancel');
 		},

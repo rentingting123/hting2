@@ -6,6 +6,7 @@
     :layout="layout"
     :contentWidth="contentWidth"
     :auto-hide-header="autoHideHeader"
+    :footer-render="footerRender"
     :mediaQuery="query"
     :isMobile="isMobile"
     :handleMediaQuery="handleMediaQuery"
@@ -37,6 +38,7 @@ export default {
       menus: [],
       collapsed: false,
       autoHideHeader: false,
+      footerRender: false,
       query: {},
       layout: 'sidemenu',
       contentWidth: 'Fluid',

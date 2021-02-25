@@ -52,7 +52,7 @@ export default {
   },
   data () {
     return {
-      showBtn: 4, 
+      showBtn: 2, 
     }
   },
   methods: {
