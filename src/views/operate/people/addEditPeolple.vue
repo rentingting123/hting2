@@ -2,7 +2,7 @@
   <div>
     <a-modal
 			v-model="visible"
-			:title="Title"
+			:title="sysDetails.id ? '添加人员' : '修改人员'"
 			on-ok="handleOk"
 			@cancel="handleCancel"
 			:footer="null"
@@ -10,62 +10,71 @@
 		<template slot="closeIcon">
 			<a-icon type="close-circle" theme="filled" @click="handleCancel"/>
 		</template>
-    <a-form
+    <a-form-model
+      ref="ruleForm"
 			layout="horizontal"
 			:label-col="formLayout.labelCol"
-      :wrapper-col="formLayout.wrapperCol">
-			<a-form-item label="姓 名">
+      :wrapper-col="formLayout.wrapperCol"
+      :model="queryParam"
+      :rules="rules">
+			<a-form-model-item label="姓 名"  prop="name">
         <a-input v-model="queryParam.name" placeholder="请输入姓名" allowClear />
-      </a-form-item>
-			<a-form-item label="电话">
-        <a-input v-model="queryParam.tel" placeholder="请输入电话" allowClear />
-      </a-form-item>
-      <a-form-item label="邮箱">
-        <a-input v-model="queryParam.tel" placeholder="请输入邮箱" allowClear />
-      </a-form-item>
-      <a-form-item label="年度目标">
-        <a-input v-model="queryParam.tel" placeholder="请输入年度目标" allowClear />
-      </a-form-item>
-      <a-form-item label="部门">
-        <a-select v-model="queryParam.status" placeholder="请选择部门" default-value="0" allowClear >
+      </a-form-model-item>
+			<a-form-model-item label="电话" prop="phoneNumber">
+        <a-input v-model="queryParam.phoneNumber" placeholder="请输入电话" allowClear />
+      </a-form-model-item>
+      <a-form-model-item label="邮箱">
+        <a-input v-model="queryParam.email" placeholder="请输入邮箱" allowClear />
+      </a-form-model-item>
+      <a-form-model-item label="年度目标">
+        <a-input v-model="queryParam.annualTarget" placeholder="请输入年度目标" allowClear />
+      </a-form-model-item>
+      <a-form-model-item label="部门" prop="departmentId">
+        <a-select v-model="queryParam.departmentId" placeholder="请选择部门" default-value="0" allowClear >
           <a-select-option value="0">全部</a-select-option>
           <a-select-option value="1">关闭</a-select-option>
           <a-select-option value="2">运行中</a-select-option>
         </a-select>
-      </a-form-item>
-      <a-form-item label="职级">
-        <a-select v-model="queryParam.status0" placeholder="请选择职级" default-value="0" allowClear >
+      </a-form-model-item>
+      <a-form-model-item label="职级" prop="positionRank">
+        <a-select v-model="queryParam.positionRank" placeholder="请选择职级" default-value="0" allowClear >
           <a-select-option value="0">全部</a-select-option>
           <a-select-option value="1">关闭</a-select-option>
           <a-select-option value="2">运行中</a-select-option>
         </a-select>
-      </a-form-item>
-			<a-form-item label="职位">
-        <a-input v-model="queryParam.tel" placeholder="请输入职位" allowClear />
-      </a-form-item>
-      <a-form-item label="角色">
-        <a-radio-group v-model="juese" @change="onChange">
+      </a-form-model-item>
+			<a-form-model-item label="职位">
+        <a-input v-model="queryParam.job" placeholder="请输入职位" allowClear />
+      </a-form-model-item>
+      <a-form-model-item label="角色" prop="roleType">
+        <a-radio-group v-model="queryParam.roleType" @change="onChange">
           <a-radio :value="1">
-            其它
-          </a-radio>
-          <a-radio  :value="2">
             管理员
           </a-radio>
+          <a-radio  :value="2">
+            其它
+          </a-radio>
         </a-radio-group>
-      </a-form-item>
-			<a-form-item :label-col="formTailLayout.labelCol" :wrapper-col="formTailLayout.wrapperCol" class="textAC">
-				<a-button key="back" @click="handleCancel" class="clear-from-button1 btnR">
+      </a-form-model-item>
+			<a-form-model-item :label-col="formTailLayout.labelCol" :wrapper-col="formTailLayout.wrapperCol" class="textAC">
+				<a-button @click="handleCancel" class="clear-from-button1 btnR">
 					取消
 				</a-button>
-				<a-button key="submit" type="primary" class="primarybtn btnR marginleft" :loading="loading" @click="handleOk">
+				<a-button
+          type="primary"
+          class="primarybtn btnR marginleft"
+          :loading="loading"
+          @click="handleOk"
+          >
 					保存 
 				</a-button>
-			</a-form-item>
-    </a-form>
+			</a-form-model-item>
+    </a-form-model>
     </a-modal>
   </div>
 </template>
 <script>
+import {sysBackerAdd,sysBackerEdit} from "@/api/Interface/operate" //接口
 const formLayout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 14 },
@@ -78,14 +87,35 @@ export default {
   data() {
     return {
       loading: false,
-			Title:'添加人员',
 			formLayout,
 			formTailLayout,
 			queryParam:{},
 			juese: 1,
+      rules: { 
+        name: [
+          { required: true, message: '请输入姓名', trigger: 'blur' },
+        ],
+        phoneNumber: [
+          { required: true,len: 11, pattern: RegExp(/^[1][3,4,5,6,7,8,9][0-9]{9}$/), message: '请输入正确的电话', trigger: 'blur' },
+        ],
+        departmentId: [
+          { required: true, message: '请选择部门', trigger: 'change' },
+        ],
+        positionRank: [
+          { required: true, message: '请选择职级', trigger: 'change' },
+        ],
+        roleType: [
+          { required: true, message: '请选择角色', trigger: 'change' },
+        ],
+      },
     };
   },
-  props:['visible'],
+  props:['visible','sysDetails'],
+    watch: {
+      sysDetails(){
+        this.queryParam = this.sysDetails
+      }
+	},
   methods: {
     check() {
       this.form.validateFields(err => {
@@ -95,11 +125,55 @@ export default {
       });
     },
     handleOk() {
+      this.$refs.ruleForm.validate(valid => {
+        if (valid) {
+          if(this.details && this.details.id){
+            this.submitEdit();
+          }else{
+            this.submitAdd()
+          }
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    // 添加
+    submitAdd() {
       this.loading = true;
-      setTimeout(() => {
-        this.$emit('visibleCancel');
-        this.loading = false;
-      }, 3000);
+			let obj = {
+				...this.queryParam
+			};
+      // console.log(obj);
+			sysBackerAdd(obj).then(res=>{
+				// console.log(res);
+				if(res.data.code === 1 ){
+					this.loading = false;
+					this.$message.success(res.data.message);
+					this.$emit('visibleCancel');
+					// this.getIndustryList(val);
+				}else{
+					this.$message.error(res.data.message);
+				}
+			})
+    },
+		// 修改
+		submitEdit(){
+			let obj = {
+				...this.queryParam
+			};
+			sysBackerEdit(obj).then(res=>{
+				if(res.data.code === 1 ){
+					this.$message.success(res.data.message);
+					this.$emit('visibleCancel');
+					// this.getIndustryList(val);
+				}else{
+					console.log("修改失败")
+				}
+			})
+		},
+    onChange(val){
+      console.log(val);
     },
     handleCancel() {
       this.$emit('visibleCancel');

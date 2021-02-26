@@ -3,24 +3,23 @@
   <div class=''>
     <a-form layout="inline" class="searchForm fromMargin">
       <a-form-item class="fromItem">
-        <a-select v-model="queryParam.status" placeholder="请选择部门" default-value="0" allowClear style="width:160px">
+        <a-select v-model="queryParam.departmentId" placeholder="请选择部门" default-value="0" allowClear style="width:160px">
           <a-select-option value="0">全部</a-select-option>
           <a-select-option value="1">关闭</a-select-option>
           <a-select-option value="2">运行中</a-select-option>
         </a-select>
       </a-form-item>
       <a-form-item class="fromItem">
-        <a-select v-model="queryParam.status0" placeholder="请选择角色" default-value="0" allowClear style="width:160px">
-          <a-select-option value="0">全部</a-select-option>
-          <a-select-option value="1">关闭</a-select-option>
-          <a-select-option value="2">运行中</a-select-option>
+        <a-select v-model="queryParam.roleType" placeholder="请选择角色" default-value="0" allowClear style="width:160px">
+          <a-select-option value="1">管理员</a-select-option>
+          <a-select-option value="2">其他</a-select-option>
         </a-select>
       </a-form-item>
 			<a-form-item class="fromItem">
-        <a-input v-model="queryParam.positionName" placeholder="请输入姓名" allowClear />
+        <a-input v-model="queryParam.name" placeholder="请输入姓名" allowClear />
       </a-form-item>
 			<a-form-item class="fromItem">
-        <a-button type="danger" class="danger-from-button">搜索</a-button>
+        <a-button type="danger" class="danger-from-button" @click="getSysBackerList">搜索</a-button>
       </a-form-item>
       <a-form-item class="fromItem2">
 				<a-button type="primary" class="primarybtn" @click="addEditModal(1)">
@@ -30,17 +29,31 @@
       </a-form-item>
     </a-form>
     <a-card :bordered="false">
-      <a-table :columns="columns" :data-source="data" :pagination="pagination" @change="handlePagination">
+      <a-table
+      :columns="columns"
+      :data-source="listData"
+      row-key="id"
+      :pagination="pagination"
+      @change="handlePagination">
+        <template slot="roleType" slot-scope="text">  
+          {{ text === 1?'管理员':text === 2?'其他':'' }}
+        </template>
 				<span slot="action" slot-scope="text,record">
-          <a-switch default-checked @change="onChange" />
-					<a-button type='link' class="primColor" size="small">编辑</a-button>
-					<a-button type='link' class="redColor" size="small">删除</a-button>
+          <a-switch  default-checked @change="onChange" />
+					<a-button
+            type='link'
+            class="primColor"
+            size="small" @click="addEditModal(1,record)">编辑</a-button>
+					<a-button
+            type='link'
+            class="redColor"
+            size="small" @click="deleteData(record.id)">删除</a-button>
           <a-button type='link' class="greenColor" size="small"
            @click="addEditModal(2,record.id)">回款</a-button>
 				</span>
       </a-table>
     </a-card> 
-	<addEditPeolple :visible='visiblePeolple' @visibleCancel="visibleCancel(1)"/>
+	<addEditPeolple :visible='visiblePeolple' :sysDetails='sysDetails' @visibleCancel="visibleCancel(1)"/>
 	<returnMoney :visible='visibleReturnMoney' :returnMoneyId='returnMoneyId'  @visibleCancel="visibleCancel(2)"/>
   </div>
 </template>
@@ -48,11 +61,13 @@
 <script>
 import addEditPeolple from './addEditPeolple'
 import returnMoney from './returnMoney'
+import {sysBackerPage, sysBackerDelete} from "@/api/Interface/operate" //接口
+
 const columns = [
   {
     title: '序号',
-    dataIndex: 'key',
-    key: 'key',
+    dataIndex: 'id',
+    key: 'id',
 	},
 	{
     title: '姓名',
@@ -61,34 +76,34 @@ const columns = [
   },
   {
     title: '电话',
-    dataIndex: 'hangye',
-    key: 'hangye',
+    dataIndex: 'phoneNumber',
+    key: 'phoneNumber',
   },
   {
     title: '部门',
-    dataIndex: 'status',
-    key: 'status'
+    dataIndex: 'departmentName',
+    key: 'departmentName'
   },
   {
     title: '职级',
-    key: 'position',
-    dataIndex: 'position',
+    key: 'creatorId',
+    dataIndex: 'creatorId',
   },
   {
     title: '职位',
-    key: 'position',
-    dataIndex: 'position',
+    key: 'job',
+    dataIndex: 'job',
   },
   {
     title: '角色',
-    key: 'people',
-    dataIndex: 'people',
+    key: 'roleType',
+    dataIndex: 'roleType',
+    scopedSlots: { customRender: 'roleType' },
   },
   {
     title: '年度目标',
-    key: 'comncont',
-    dataIndex: 'comncont',
-    // width: 300
+    key: 'annualTarget',
+    dataIndex: 'annualTarget',
   },
   {
     title: '回款金额',
@@ -102,47 +117,21 @@ const columns = [
     scopedSlots: { customRender: 'action' },
   },
 ];
-const data = [
-  {
-    key: '1',
-    name: '张三',
-    hangye: '13012345678',
-    status: '市场部',
-    position:'科技组',
-    people: '总监',
-    comncont: '12300000',
-    time: '1000',
-  },
-  {
-    key: '2',
-		name: '张三',
-    hangye: '13012345678',
-    status: '市场部',
-    position:'科技组',
-    people: '总监',
-    comncont: '12300000',
-    time: '1000',
-  },
-  {
-    key: '3',
-		name: '张三',
-    hangye: '13012345678',
-    status: '市场部',
-    position:'科技组',
-    people: '总监',
-    comncont: '12300000',
-    time: '1000',
-  },
-];
+
 export default {
 	data() {
 		return {
-			data,
+			listData: [], // 列表数据
 			columns,
-			queryParam: {},  // 查询参数
+			queryParam: {
+        departmentId: undefined,
+        name: '',
+        roleType: undefined
+      },  // 查询参数
 			formLayout: 'horizontal',
 			form: this.$form.createForm(this, { name: 'coordinated' }),
 			visiblePeolple: false, // 展示添加人员
+      sysDetails: {}, // 展示添加人员id
       visibleReturnMoney: false, // 展示回款
       returnMoneyId: '', // 回款id
 			pagination: {
@@ -159,35 +148,48 @@ export default {
 		addEditPeolple,
     returnMoney
 	},
+  mounted(){
+		this.getSysBackerList();
+	},
 	// 方法集合
 	methods: {
+    // 查询列表
+    getSysBackerList(){
+			let obj = {
+        ...this.queryParam
+			};
+			sysBackerPage(obj).then(res=>{
+				if(res.data.code === 1 ){
+					this.listData= res.data.data.list;
+				}else{
+					console.log("查询失败")
+				}
+			})
+		},
 		handlePagination(pagination){
 			console.log(pagination.current);
 		},
-		handleSubmit(e) {
-      e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-        }
-      });
-    },
-    handleSelectChange(value) {
-      console.log(value);
-      this.form.setFieldsValue({
-        note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`,
-      });
-		},
 		// 添加部门
-		addEditModal(i,id){
+		addEditModal(i,item){
 			if(i === 1){
-        // 添加人员
+        // 添加修改人员
 				this.visiblePeolple = true
+        this.sysDetails = item;
 			}else if(i === 2){
         // 回款
 				this.visibleReturnMoney = true
-        this.returnMoneyId = id
+        this.returnMoneyId = item
 			}
+		},
+    // 删除
+    deleteData(id){
+			sysBackerDelete(id).then(res=>{
+				if(res.data.code === 1 ){
+					this.$message.success(res.data.message);
+				}else{
+					console.log("修改失败")
+				}
+			})
 		},
 		// 关闭弹框
 		visibleCancel(i){
