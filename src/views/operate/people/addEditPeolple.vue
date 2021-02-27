@@ -2,7 +2,7 @@
   <div>
     <a-modal
 			v-model="visible"
-			:title="sysDetails.id ? '添加人员' : '修改人员'"
+			:title="sysDetails ? '修改人员' : ' 添加人员'"
 			on-ok="handleOk"
 			@cancel="handleCancel"
 			:footer="null"
@@ -112,8 +112,8 @@ export default {
   },
   props:['visible','sysDetails'],
     watch: {
-      sysDetails(){
-        this.queryParam = this.sysDetails
+      sysDetails(val){
+        this.queryParam =val? val : {}
       }
 	},
   methods: {
@@ -144,9 +144,7 @@ export default {
 			let obj = {
 				...this.queryParam
 			};
-      // console.log(obj);
 			sysBackerAdd(obj).then(res=>{
-				// console.log(res);
 				if(res.data.code === 1 ){
 					this.loading = false;
 					this.$message.success(res.data.message);

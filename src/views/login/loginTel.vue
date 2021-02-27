@@ -78,13 +78,11 @@ export default {
             password: values.password
           }
           goLogin(obj).then(res=>{
-            console.log(res);
             if(res.data.code === 1 ){
               this.$router.push("/Home")
-            }else if(res.data.code  === 4){
-              this.$router.push("/Login")
+              this.$message.success(res.data.message);
             }else{
-              console.log("登录失败")
+              this.$message.error(res.data.message);
             }
           })
         }

@@ -1,33 +1,34 @@
 <!--  -->
 <template>
   <div class=''>
-    <a-form layout="inline" class="searchForm fromMargin">
-      <a-form-item class="fromItem">
-        <a-select v-model="queryParam.departmentId" placeholder="请选择部门" default-value="0" allowClear style="width:160px">
-          <a-select-option value="0">全部</a-select-option>
-          <a-select-option value="1">关闭</a-select-option>
-          <a-select-option value="2">运行中</a-select-option>
-        </a-select>
-      </a-form-item>
-      <a-form-item class="fromItem">
-        <a-select v-model="queryParam.roleType" placeholder="请选择角色" default-value="0" allowClear style="width:160px">
-          <a-select-option value="1">管理员</a-select-option>
-          <a-select-option value="2">其他</a-select-option>
-        </a-select>
-      </a-form-item>
-			<a-form-item class="fromItem">
-        <a-input v-model="queryParam.name" placeholder="请输入姓名" allowClear />
-      </a-form-item>
-			<a-form-item class="fromItem">
-        <a-button type="danger" class="danger-from-button" @click="getSysBackerList">搜索</a-button>
-      </a-form-item>
-      <a-form-item class="fromItem2">
-				<a-button type="primary" class="primarybtn" @click="addEditModal(1)">
-					<a-icon type="plus-circle" theme="filled" />
-					添加人员
-				</a-button>
-      </a-form-item>
-    </a-form>
+    <div class="flexSpace searchForm fromMargin">
+      <a-form layout="inline">
+        <a-form-item class="fromItem">
+          <a-select v-model="queryParam.departmentId" placeholder="请选择部门" default-value="0" allowClear style="width:160px">
+            <a-select-option value="0">全部</a-select-option>
+            <a-select-option value="1">关闭</a-select-option>
+            <a-select-option value="2">运行中</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item class="fromItem">
+          <a-select v-model="queryParam.roleType" placeholder="请选择角色" default-value="0" allowClear style="width:160px">
+            <a-select-option value="1">管理员</a-select-option>
+            <a-select-option value="2">其他</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item class="fromItem">
+          <a-input v-model="queryParam.name" placeholder="请输入姓名" allowClear />
+        </a-form-item>
+        <a-form-item class="fromItem">
+          <a-button type="danger" class="danger-from-button" @click="getSysBackerList">搜索</a-button>
+        </a-form-item>
+      
+      </a-form>
+      <a-button type="primary" class="primarybtn" @click="addEditModal(1,undefined)">
+        <a-icon type="plus-circle" theme="filled" />
+        添加人员
+      </a-button>
+    </div>
     <a-card :bordered="false">
       <a-table
       :columns="columns"
@@ -131,7 +132,7 @@ export default {
 			formLayout: 'horizontal',
 			form: this.$form.createForm(this, { name: 'coordinated' }),
 			visiblePeolple: false, // 展示添加人员
-      sysDetails: {}, // 展示添加人员id
+      sysDetails: undefined, // 展示添加人员id
       visibleReturnMoney: false, // 展示回款
       returnMoneyId: '', // 回款id
 			pagination: {
