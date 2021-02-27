@@ -33,3 +33,23 @@ export function sysBackerPage(params){
 export function sysBackerDelete(id){
     return axios.delete(`/sys-backer/${id}`);
 }
+// 17 人员禁用-启用
+export function sysBackerStatus(id){
+    return axios.delete(`/sys-backer/status/${id}`);
+}
+// 18 回款记录 添加
+export function receivableAdd(data){
+    return axios.post('/receivable',data);
+}
+// 14回款记录 修改
+export function receivableEdit(data){
+    return axios.put('/receivable',data);
+}
+// 20 回款记录 查询
+export function receivablePage(params){
+    return axios.get('/receivable/page',{params});
+}
+//  xx 回款记录-删除
+export function receivableDelete(id){
+    return axios.delete(`/receivable/${id}`);
+}

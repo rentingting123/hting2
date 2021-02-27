@@ -40,7 +40,7 @@
           {{ text === 1?'管理员':text === 2?'其他':'' }}
         </template>
 				<span slot="action" slot-scope="text,record">
-          <a-switch  default-checked @change="onChange" />
+          <a-switch  :checked="record.status === 0? true : false" @change="onChange(record)" />
 					<a-button
             type='link'
             class="primColor"
@@ -62,7 +62,7 @@
 <script>
 import addEditPeolple from './addEditPeolple'
 import returnMoney from './returnMoney'
-import {sysBackerPage, sysBackerDelete} from "@/api/Interface/operate" //接口
+import {sysBackerPage, sysBackerDelete, sysBackerStatus} from "@/api/Interface/operate" //接口
 
 const columns = [
   {
@@ -162,8 +162,9 @@ export default {
 			sysBackerPage(obj).then(res=>{
 				if(res.data.code === 1 ){
 					this.listData= res.data.data.list;
+          this.$message.success(res.data.message);
 				}else{
-					console.log("查询失败")
+					this.$message.error(res.data.message);
 				}
 			})
 		},
@@ -203,8 +204,18 @@ export default {
       }
 		},
     // 改变
-    onChange(checked) {
-      console.log(`a-switch to ${checked}`);
+    onChange(item) {
+      // console.log(`a-switch to ${item}`);
+      sysBackerStatus(item.id).then(res=>{
+        if(res.data.code === 1){
+          this.$message.success(res.data.message);
+          this.getSysBackerList();
+        }else{
+          this.$message.error(res.data.message);
+        }
+      }).catch(err=>{
+        console.log(err);
+      });
     },
 	},
 }
