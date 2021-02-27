@@ -15,7 +15,7 @@
 	<a-empty v-else/>
 </template>
 <script>
-import { industryDelete } from "@/api/Interface/operate" //接口
+import { industryDelete, jobsDelete} from "@/api/Interface/operate" //接口
 export default {
   data() {
     return {
@@ -29,17 +29,35 @@ export default {
 				value: e.target.value,
 				type: this.type
 			};
-			this.$emit('getIndustryList',obj);
+			this.$emit('getList',obj);
 		},
 		deleteData(id){
+			if(this.type === 1 || this.type === 2 || this.type === 3 ||this.type === 4){
+				this.industryDeleteFun(id)
+			}
+			if(this.type === 5 || this.type === 6 || this.type === 7 ||this.type === 8){
+				this.jobsDeleteFun(id)
+			}
+		},
+		industryDeleteFun(id){
 			industryDelete(id).then(res=>{
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
 					this.$emit('visibleCancel');
 				}else{
-					console.log("修改失败")
+					this.$message.error(res.data.message);
 				}
-			})
+			});
+		},
+		jobsDeleteFun(id){
+			jobsDelete(id).then(res=>{
+				if(res.data.code === 1 ){
+					this.$message.success(res.data.message);
+					this.$emit('visibleCancel');
+				}else{
+					this.$message.error(res.data.message);
+				}
+			});
 		},
 		editData(item){
 			const obj = {
@@ -47,7 +65,7 @@ export default {
 				type: this.type,
 				name: item.name
 			};
-			this.$emit('industryEdit',obj);
+			this.$emit('listEdit',obj);
 		},
   },
 };

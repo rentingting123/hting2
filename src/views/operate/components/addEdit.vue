@@ -54,8 +54,9 @@ export default {
 		type(){
 			this.typeChange()
 		},
-		details(){
-			this.queryParam.name = this.details.name
+		details(val){
+			this.queryParam.name = val? val.name : undefined
+			this.typeChange()
 		}
 	},
 	mounted(){

@@ -189,7 +189,7 @@ export default {
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
 				}else{
-					console.log("修改失败")
+					this.$message.error(res.data.message);
 				}
 			})
 		},

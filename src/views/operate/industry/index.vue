@@ -13,8 +13,8 @@
 					<radioGroupList
 					:type='1'
 					:listData="listData1"
-					@getIndustryList="getIndustryList"
-					@industryEdit="industryEdit"
+					@getList="getIndustryList"
+					@listEdit="industryEdit"
 					/>
         </a-card>
       </a-col>
@@ -27,7 +27,11 @@
 					:headStyle='headStyle'
 					:bodyStyle='bodyStyle'>
            <a class="primColor" slot="extra" @click="addIndustry(2)">+新建</a>
-					<radioGroupList :type='2' :listData="listData2" @getIndustryList="getIndustryList"/>
+					<radioGroupList
+					:type='2'
+					:listData="listData2"
+					@getList="getIndustryList"
+					@listEdit="industryEdit"/>
         </a-card>
       </a-col>
       <a-col :xs="24" :md="12" :xl="6">
@@ -39,7 +43,12 @@
 					:headStyle='headStyle'
 					:bodyStyle='bodyStyle'>
            <a class="primColor" slot="extra" @click="addIndustry(3)">+新建</a>
-					<radioGroupList :type='3' :listData="listData3" @getIndustryList="getIndustryList"/>
+					<radioGroupList
+						:type='3'
+						:listData="listData3"
+						@getList="getIndustryList"
+						@listEdit="industryEdit"
+					/>
         </a-card>
       </a-col>
       <a-col :xs="24" :md="12" :xl="6">
@@ -51,7 +60,10 @@
 					:headStyle='headStyle'
 					:bodyStyle='bodyStyle'>
            <a class="primColor" slot="extra" @click="addIndustry(4)">+新建</a>
-					<radioGroupList :type='4' :listData="listData4"/>
+					<radioGroupList
+						:type='4'
+						:listData="listData4"
+						@listEdit="industryEdit"/>
         </a-card>
       </a-col>
 			<addEdit
@@ -82,7 +94,7 @@ export default {
 			bodyStyle,
 			visible: false,
 			type: 1,// 页面类型
-			details:{},//ID
+			details: undefined,//ID
 			listData1: [],// 列表数据 一级
 			listData2: [],// 列表数据 二级
 			listData3: [],// 列表数据 三级
@@ -102,29 +114,27 @@ export default {
 			this.visible = true 
 		},
 		visibleCancel(){
-			this.visible = false 
+			this.visible = false
+			this.details = undefined
 		},
 		industryEdit(val){
-			console.log(val,999);
 			this.type = val.type;
 			this.visible = true
 			this.details = {...val}
 		},
 		getIndustryList(val){
+				console.log(val);
 			let obj = {
 				parentId: val ? val.value : 0
 			};
 			industryPage(obj).then(res=>{
-				console.log(res);
+				console.log(res,val);
 				if(res.data.code === 1 ){
 					if(val && val.type === 1){
-						console.log(1111)
 						this.listData2 = res.data.data.list;
 					}else if(val && val.type === 2){
-							console.log(222)
 						this.listData3 = res.data.data.list;
 					}else if(val && val.type === 3){
-							console.log(333)
 						this.listData4 = res.data.data.list;
 					}else{
 						this.listData1 = res.data.data.list;

@@ -17,6 +17,22 @@ export function industryDelete(id){
 export function industryPage(params){
     return axios.get('/industry/page',{params});
 }
+//5 岗位-添加
+export function jobsAdd(data){
+    return axios.post('/jobs',data);
+}
+//6 岗位-修改
+export function jobsEdit(data){
+    return axios.put('/jobs',data);
+}
+//7 岗位-删除
+export function jobsDelete(id){
+    return axios.delete(`/jobs/${id}`,);
+}
+//8 岗位-列表
+export function jobsPage(params){
+    return axios.get('/jobs/page',{params});
+}
 // 13人员添加
 export function sysBackerAdd(data){
     return axios.post('/sys-backer',data);
