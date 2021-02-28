@@ -3,8 +3,8 @@ import qs from 'qs';
 // import { Message } from 'ant-design-vue';
 // import router from '@/router';
 // 设置默认地址
-// const baseURL = 'http://47.114.156.143:9090';
-const baseURL = 'http://47.114.156.143:3000/mock/11/'
+const baseURL = 'http://47.114.156.143:9090';
+// const baseURL = 'http://47.114.156.143:3000/mock/11/'
 
 
 // 添加请求拦截器
@@ -15,7 +15,7 @@ const request = axios.create({
 //	或者这样设置
 // request.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
 // request.defaults.crossDomain = true;
-// request.defaults.withCredentials = true;  //设置cross跨域 并设置访问权限 允许跨域携带cookie信息
+request.defaults.withCredentials = true;  //设置cross跨域 并设置访问权限 允许跨域携带cookie信息
 // request.defaults.headers.common['Authorization'] = ''; // 设置请求头为 Authorization
 
 request.interceptors.request.use(function (config) {
