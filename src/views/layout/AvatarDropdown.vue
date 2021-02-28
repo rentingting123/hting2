@@ -6,7 +6,9 @@
       </a>
       <a-menu slot="overlay">
         <a-menu-item>
-          <a href="javascript:;">新增简历</a>
+          <router-link to="/resumeAdd">
+           <a href="javascript:;">新增简历</a>
+          </router-link>
         </a-menu-item>
         <a-menu-item>
           <a href="javascript:;">新增职位</a>

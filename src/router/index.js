@@ -6,7 +6,9 @@ import Home from '@/views/Home'
 import position from '@/views/position'
 import positionDetails from '@/views/position/details'
 
+// 简历管理
 import resume from '@/views/resume'
+import resumeAdd from '@/views/resume/add'
 // 客户管理
 import customer from '@/views/customer'
 import customerAdd from '@/views/customer/add'
@@ -60,6 +62,15 @@ export const pageRouter = [
     meta: {
       title: '简历管理',
       icon: 'file-protect'
+    },
+  },
+  {
+    path: '/resumeAdd',
+    name: 'resumeAdd',
+    component: resumeAdd,
+    hidden: true,
+    meta: {
+      title: '添加简历',
     },
   },
   {
