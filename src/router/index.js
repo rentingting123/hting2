@@ -9,6 +9,8 @@ import positionDetails from '@/views/position/details'
 // 简历管理
 import resume from '@/views/resume'
 import resumeAdd from '@/views/resume/add'
+import resumeUpload from '@/views/resume/resumeUpload'
+
 // 客户管理
 import customer from '@/views/customer'
 import customerAdd from '@/views/customer/add'
@@ -71,6 +73,15 @@ export const pageRouter = [
     hidden: true,
     meta: {
       title: '添加简历',
+    },
+  },
+  {
+    path: '/resumeUpload',
+    name: 'resumeUpload',
+    component: resumeUpload,
+    hidden: true,
+    meta: {
+      title: '上传简历',
     },
   },
   {
