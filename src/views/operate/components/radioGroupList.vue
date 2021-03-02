@@ -27,9 +27,9 @@ export default {
     onChange(e) {
 			const obj = {
 				value: e.target.value,
-				type: this.type
+				type: this.type + 1
 			};
-			this.$emit('getList',obj);
+			this.$emit('getChildrenList',obj);
 		},
 		deleteData(id){
 			if(this.type === 1 || this.type === 2 || this.type === 3 ||this.type === 4){
@@ -43,7 +43,7 @@ export default {
 			industryDelete(id).then(res=>{
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
-					this.$emit('visibleCancel');
+					this.$emit('queryList');
 				}else{
 					this.$message.error(res.data.message);
 				}
@@ -53,7 +53,7 @@ export default {
 			jobsDelete(id).then(res=>{
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
-					this.$emit('visibleCancel');
+					this.$emit('queryList');
 				}else{
 					this.$message.error(res.data.message);
 				}

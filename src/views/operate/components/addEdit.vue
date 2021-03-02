@@ -117,8 +117,7 @@ export default {
 				if(res.data.code === 1 ){
 					this.loading = false;
 					this.$message.success(res.data.message);
-					this.$emit('visibleCancel');
-					// this.getIndustryList(val);
+					this.$emit('queryList');
 				}else{
 					this.$message.error(res.data.message);
 				}
@@ -134,7 +133,7 @@ export default {
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
 					this.$emit('visibleCancel');
-					// this.getIndustryList(val);
+					this.$emit('queryList');
 				}else{
 					console.log("修改失败")
 				}

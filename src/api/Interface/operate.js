@@ -15,7 +15,7 @@ export function industryDelete(id){
 }
 //4行业列表
 export function industryPage(params){
-    return axiosGet('/industry/page',{params});
+    return axiosGet('/industry/page',params);
 }
 //5 岗位-添加
 export function jobsAdd(data){

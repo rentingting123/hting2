@@ -1,73 +1,29 @@
 <!--  -->
 <template>
     <a-row :gutter="16">
-      <a-col :xs="24" :md="12" :xl="6">
+      <a-col :xs="24" :md="12" :xl="6"
+				v-for="(item, index) in cardList"
+				:key="index">
         <a-card
-					title="行业一级类目"
+					:title="item.title"
 					:bordered="false"
 					:hoverable='true'
 					class="cardBox maxHeight"
 					:headStyle='headStyle'
 					:bodyStyle='bodyStyle'>
-          <a class="primColor" slot="extra" @click="addIndustry(1)">+新建</a>
+          <a class="primColor" slot="extra" @click="addIndustry(item.type)">+新建</a>
 					<radioGroupList
-					:type='1'
-					:listData="listData1"
-					@getList="getIndustryList"
-					@listEdit="industryEdit"
-					/>
-        </a-card>
-      </a-col>
-      <a-col :xs="24" :md="12" :xl="6">
-				<a-card
-					title="行业二级类目"
-					:bordered="false"
-					:hoverable='true'
-					class="cardBox maxHeight"
-					:headStyle='headStyle'
-					:bodyStyle='bodyStyle'>
-           <a class="primColor" slot="extra" @click="addIndustry(2)">+新建</a>
-					<radioGroupList
-					:type='2'
-					:listData="listData2"
-					@getList="getIndustryList"
-					@listEdit="industryEdit"/>
-        </a-card>
-      </a-col>
-      <a-col :xs="24" :md="12" :xl="6">
-				<a-card
-					title="行业三级类目"
-					:bordered="false"
-					:hoverable='true'
-					class="cardBox maxHeight"
-					:headStyle='headStyle'
-					:bodyStyle='bodyStyle'>
-           <a class="primColor" slot="extra" @click="addIndustry(3)">+新建</a>
-					<radioGroupList
-						:type='3'
-						:listData="listData3"
-						@getList="getIndustryList"
+						:type='item.type'
+						:listData="item.listData"
+						@queryList="queryList"
+						@getChildrenList="getChildrenList"
 						@listEdit="industryEdit"
-					/>
-        </a-card>
-      </a-col>
-      <a-col :xs="24" :md="12" :xl="6">
-				<a-card
-					title="行业四级类目"
-					:bordered="false"
-					:hoverable='true'
-					class="cardBox maxHeight"
-					:headStyle='headStyle'
-					:bodyStyle='bodyStyle'>
-           <a class="primColor" slot="extra" @click="addIndustry(4)">+新建</a>
-					<radioGroupList
-						:type='4'
-						:listData="listData4"
-						@listEdit="industryEdit"/>
+						/>
         </a-card>
       </a-col>
 			<addEdit
 				:visible='visible'
+				@queryList="queryList"
 				@visibleCancel="visibleCancel(2)"
 				:type="type"
 				:details="details"/>
@@ -87,18 +43,37 @@ const headStyle = {
 const bodyStyle = {
 	padding: '14px',
 }
+const cardList = [
+	{
+		type: 1,
+		title:'行业一级类目',
+		listData: []
+	},
+		{
+		type: 2,
+		title:'行业二级类目',
+		listData: []
+	},
+		{
+		type: 3,
+		title:'行业三级类目',
+		listData: []
+	},
+		{
+		type: 4,
+		title:'行业四级类目',
+		listData: []
+	},
+]
 export default {
 	data() {
 		return {
+			cardList,// card列表
 			headStyle,
 			bodyStyle,
 			visible: false,
 			type: 1,// 页面类型
-			details: undefined,//ID
-			listData1: [],// 列表数据 一级
-			listData2: [],// 列表数据 二级
-			listData3: [],// 列表数据 三级
-			listData4: []// 列表数据 四级
+			details: undefined,// ID
 		};
 	},
 	components: {
@@ -106,7 +81,7 @@ export default {
 		addEdit
 	},
 	mounted(){
-		this.getIndustryList();
+		this.getIndustryList(1);
 	},
 	methods: {
 		addIndustry(i){
@@ -117,28 +92,28 @@ export default {
 			this.visible = false
 			this.details = undefined
 		},
+		queryList(){
+			this.visibleCancel()
+			this.getIndustryList(1);
+		},
+		// 查询子列表
+		getChildrenList(obj){
+			this.getIndustryList(obj.type,obj.value);
+		},
 		industryEdit(val){
 			this.type = val.type;
 			this.visible = true
 			this.details = {...val}
 		},
-		getIndustryList(val){
-				console.log(val);
+		getIndustryList(type,value){
+				console.log(type,value,3434);
 			let obj = {
-				parentId: val ? val.value : 0
+				parentId: value ? value : 0
 			};
 			industryPage(obj).then(res=>{
-				console.log(res,val);
 				if(res.data.code === 1 ){
-					if(val && val.type === 1){
-						this.listData2 = res.data.data.list;
-					}else if(val && val.type === 2){
-						this.listData3 = res.data.data.list;
-					}else if(val && val.type === 3){
-						this.listData4 = res.data.data.list;
-					}else{
-						this.listData1 = res.data.data.list;
-					}
+					this.cardList[type-1].listData =res.data.data.list
+					console.log(type,this.cardList,res.data.data.list);
 				}else{
 					console.log("查询失败")
 				}
