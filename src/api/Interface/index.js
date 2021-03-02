@@ -1,8 +1,6 @@
-import axios from "../axios"
+import { axiosPostQs } from "../axios"
+
 
 export function goLogin(data){
-    return axios.post('/login',data);
-}
-export function dictPage(){
-    return axios.get('/dict/page');
+    return axiosPostQs('/login',data);
 }

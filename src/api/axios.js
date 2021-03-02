@@ -2,27 +2,11 @@ import axios from "axios"
 import qs from 'qs';
 // import { Message } from 'ant-design-vue';
 // import router from '@/router';
-// 设置默认地址
-const baseURL = 'http://47.114.156.143:9090';
-// const baseURL = 'http://47.114.156.143:3000/mock/11/'
 
-
-// 添加请求拦截器
-
-const request = axios.create({
-  baseURL,
-});
-//	或者这样设置
-// request.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
-// request.defaults.crossDomain = true;
+const request = axios.create();
 request.defaults.withCredentials = true;  //设置cross跨域 并设置访问权限 允许跨域携带cookie信息
-// request.defaults.headers.common['Authorization'] = ''; // 设置请求头为 Authorization
 
 request.interceptors.request.use(function (config) {
-  const { method, data } = config;
-  if (method.toUpperCase() === "POST" && data instanceof Object) {
-    config.data = qs.stringify(data);
-  }
     return config;
   }, function (error) {
     return Promise.reject(error);
@@ -70,4 +54,81 @@ request.interceptors.request.use(function (config) {
 //         return Promise.reject(error)
 //     }
 // );
-export default request
+
+/**
+ * 封装post请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+export function axiosPostQs(url, data) {
+  return new Promise((resolve, reject) => {
+    request.post('/api' + url, qs.stringify(data))
+    .then(response => {
+        resolve(response)
+    })
+    .catch(err => {
+        reject(err)
+    })
+  })
+}
+export function axiosPost(url, data) {
+  return new Promise((resolve, reject) => {
+    request.post('/api' + url, data, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => {
+        resolve(response)
+    })
+    .catch(err => {
+        reject(err)
+    })
+  })
+}
+
+/**
+ * 封装get方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function axiosGet(url, params = {}) {
+  return new Promise((resolve, reject) => {
+      axios.get('/api' + url, {
+        params: params
+      })
+      .then(response => {
+          resolve(response)
+      })
+      .catch(err => {
+          reject(err)
+      })
+  })
+}
+// delete
+export function axiosDelete(url) {
+  return new Promise((resolve, reject) => {
+    axios.delete('/api' + url)
+    .then(response => {
+        resolve(response)
+    })
+    .catch(err => {
+        reject(err)
+    })
+  })
+}
+// put
+export function axiosPut(url, data) {
+  return new Promise((resolve, reject) => {
+    axios.put('/api' + url, data)
+    .then(response => {
+        resolve(response)
+    })
+    .catch(err => {
+        reject(err)
+    })
+  })
+}
