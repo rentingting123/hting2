@@ -10,6 +10,7 @@ import positionDetails from '@/views/position/details'
 import resume from '@/views/resume'
 import resumeAdd from '@/views/resume/add'
 import resumeUpload from '@/views/resume/resumeUpload'
+import talentReport from '@/views/resume/talentReport'
 
 // 客户管理
 import customer from '@/views/customer'
@@ -84,6 +85,16 @@ export const pageRouter = [
       title: '上传简历',
     },
   },
+  {
+    path: '/talentReport',
+    name: 'talentReport',
+    component: talentReport,
+    hidden: true,
+    meta: {
+      title: '人才推荐报告',
+    },
+  },
+  
   {
     path: '/customer',
     name: 'customer',
