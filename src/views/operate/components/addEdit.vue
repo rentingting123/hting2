@@ -13,6 +13,9 @@
 			layout="horizontal"
 			:label-col="formLayout.labelCol"
 			:wrapper-col="formLayout.wrapperCol">
+			<a-form-item label="上级类目名称" v-if="type !== 1">
+				{{ parentDetails.labelName }}
+			</a-form-item>
 			<a-form-item :label="label">
 				<a-input v-model="queryParam.name" placeholder="请输入" allowClear />
 			</a-form-item>
@@ -49,7 +52,7 @@ export default {
 			checkNick: false,
     };
   },
-	props:['visible','type','details'],
+	props:['visible','type','details','parentDetails'],
 	watch: {
 		type(){
 			this.typeChange()
@@ -110,14 +113,18 @@ export default {
       this.loading = true;
 			let obj = {
 				name: this.queryParam.name,
-				parentId: 0
+				parentId: this.parentDetails.parentId ? this.parentDetails.parentId: 0
 			};
 			industryAdd(obj).then(res=>{
 				console.log(res);
 				if(res.data.code === 1 ){
 					this.loading = false;
 					this.$message.success(res.data.message);
-					this.$emit('queryList');
+					let obj = {
+						type: this.type,
+						parentId: this.parentDetails.parentId ? this.parentDetails.parentId: 0
+					}
+					this.$emit('queryList',obj);
 				}else{
 					this.$message.error(res.data.message);
 				}
@@ -132,8 +139,11 @@ export default {
 			industryEdit(obj).then(res=>{
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
-					this.$emit('visibleCancel');
-					this.$emit('queryList');
+					let obj = {
+						type: this.type,
+						parentId: this.parentDetails.parentId ? this.parentDetails.parentId: 0
+					}
+					this.$emit('queryList',obj);
 				}else{
 					console.log("修改失败")
 				}

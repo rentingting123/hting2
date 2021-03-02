@@ -2,12 +2,12 @@
   <a-radio-group v-if="listData.length>0" v-model="value" @change="onChange" class="Radiogroup">
 		<a-row v-for="(item,index) in listData" :key="index" class="rowRadioStyle">
       <a-col :span="20" >
-        <a-radio :value="item.id" class="radioStyle">
+        <a-radio :value="item" class="radioStyle">
 					<span>{{ item.name }}</span>
 				</a-radio>
       </a-col>
 			<a-col :span="4" class="RadioOption">
-				<i class="iconfont redColor" @click="deleteData(item.id)">&#xe614;</i>
+				<i class="iconfont redColor" @click="deleteData(item)">&#xe614;</i>
 				<i class="iconfont primColor"  @click="editData(item)">&#xe615;</i>
       </a-col>
 		</a-row>
@@ -25,35 +25,45 @@ export default {
   props: ['type','listData'],
   methods: {
     onChange(e) {
+			console.log( e.target.value.id,e.target.value.name)
 			const obj = {
-				value: e.target.value,
+				value: e.target.value.id,
+				labelName: e.target.value.name,
 				type: this.type + 1
 			};
 			this.$emit('getChildrenList',obj);
 		},
-		deleteData(id){
+		deleteData(item){
 			if(this.type === 1 || this.type === 2 || this.type === 3 ||this.type === 4){
-				this.industryDeleteFun(id)
+				this.industryDeleteFun(item)
 			}
 			if(this.type === 5 || this.type === 6 || this.type === 7 ||this.type === 8){
-				this.jobsDeleteFun(id)
+				this.jobsDeleteFun(item)
 			}
 		},
-		industryDeleteFun(id){
-			industryDelete(id).then(res=>{
+		industryDeleteFun(item){
+			industryDelete(item.id).then(res=>{
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
-					this.$emit('queryList');
+					let obj = {
+						type: this.type,
+						parentId: item.parentId
+					}
+					this.$emit('queryList',obj);
 				}else{
 					this.$message.error(res.data.message);
 				}
 			});
 		},
-		jobsDeleteFun(id){
-			jobsDelete(id).then(res=>{
+		jobsDeleteFun(item){
+			jobsDelete(item).then(res=>{
 				if(res.data.code === 1 ){
 					this.$message.success(res.data.message);
-					this.$emit('queryList');
+					let obj = {
+						type: this.type,
+						parentId: item.parentId
+					}
+					this.$emit('queryList',obj);
 				}else{
 					this.$message.error(res.data.message);
 				}

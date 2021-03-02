@@ -26,7 +26,8 @@
 				@queryList="queryList"
 				@visibleCancel="visibleCancel(2)"
 				:type="type"
-				:details="details"/>
+				:details="details"
+				:parentDetails="parentDetails"/>
     </a-row>
 </template>
 
@@ -74,6 +75,7 @@ export default {
 			visible: false,
 			type: 1,// 页面类型
 			details: undefined,// ID
+			parentDetails:{},
 		};
 	},
 	components: {
@@ -90,14 +92,19 @@ export default {
 		},
 		visibleCancel(){
 			this.visible = false
-			this.details = undefined
+			this.details = {}
 		},
-		queryList(){
+		// 添加后操作 查询，关闭页面
+		queryList(obj){
 			this.visibleCancel()
-			this.getIndustryList(1);
+			this.getIndustryList(obj.type,obj.parentId);
 		},
 		// 查询子列表
 		getChildrenList(obj){
+			this.parentDetails = {
+				parentId : obj.value,
+				labelName :obj.labelName
+			}
 			this.getIndustryList(obj.type,obj.value);
 		},
 		industryEdit(val){
@@ -105,10 +112,9 @@ export default {
 			this.visible = true
 			this.details = {...val}
 		},
-		getIndustryList(type,value){
-				console.log(type,value,3434);
+		getIndustryList(type,parentId){
 			let obj = {
-				parentId: value ? value : 0
+				parentId: parentId ? parentId : 0
 			};
 			industryPage(obj).then(res=>{
 				if(res.data.code === 1 ){
