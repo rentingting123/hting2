@@ -330,12 +330,6 @@ export default {
 		border-radius: 50%;
 		background-color: #FF6864FF;
 	}
-	.language .tags{
-		background:#F1F7FFFF;
-		color:#435EBEFF;
-		border:none;
-		margin-left: 10px;
-	}
 	.occupation{
 		font-size: 16px;
 		position: relative;

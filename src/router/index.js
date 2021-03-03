@@ -11,6 +11,7 @@ import resume from '@/views/resume'
 import resumeAdd from '@/views/resume/add'
 import resumeUpload from '@/views/resume/resumeUpload'
 import talentReport from '@/views/resume/talentReport'
+import resumeDetails from '@/views/resume/details'
 
 // 客户管理
 import customer from '@/views/customer'
@@ -65,6 +66,17 @@ export const pageRouter = [
     meta: {
       title: '简历管理',
       icon: 'file-protect'
+    },
+  },
+  {
+    path: '/resumeDetails',
+    name: 'resumeDetails',
+    component: resumeDetails,
+    hidden: true,
+    meta: {
+      title: '简历详情',
+      icon: 'file-protect',
+      hideChildrenInMenu: true,
     },
   },
   {

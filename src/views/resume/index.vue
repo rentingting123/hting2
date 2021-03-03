@@ -144,9 +144,13 @@
       </div>
     </a-card>
     <div class="peopleList">
-      <a-row :gutter="16" class="peopleItem cardBox" v-for="(item, index) in peopleList" :key="index">
+      <a-row
+      :gutter="16"
+      class="peopleItem cardBox"
+      v-for="(item, index) in peopleList" :key="index"
+      >
         <a-col :span="14" class="resumeInfo">
-          <div class="infoTop">
+          <div class="infoTop" @click="goDetails(item.id)">
             <img :src="item.info.img?item.img:logom" alt="" class="img">
             <div class="infoR">
               <div class="xinxi">
@@ -197,115 +201,9 @@
             <a-button :type="item.optionbtn.sc ==1?'danger':''" :class="item.optionbtn.sc ==1?'danger-from-button':'clear-from-button' ">
               <a-icon type="star" theme="filled"/>已收藏
             </a-button>
-            <!-- 转发-->
-            <a-popover v-model="item.optionbtn.zfvisible" trigger="click" placement="bottomRight">
-              <a slot="content" >
-                <a-form-model
-                  ref="dynamicValidateForm"
-                  :model="form"
-                  layout="horizontal"
-                  class="width300 padding20"
-                  v-bind="{
-                    labelCol: { span: 6 },
-                    wrapperCol: { span: 18 },
-                  }">
-                  <a-form-model-item label="顾问">
-                    <a-select placeholder="请选择" allowClear>
-                      <a-select-option value="王同学">王同学</a-select-option>
-                      <a-select-option value="李同学">李同学</a-select-option>
-                      <a-select-option value="黄同学">黄同学</a-select-option>
-                    </a-select>
-                  </a-form-model-item>
-                 <a-form-model-item label="公司">
-                    <a-select placeholder="请选择" allowClear>
-                      <a-select-option value="王同学">王同学</a-select-option>
-                      <a-select-option value="李同学">李同学</a-select-option>
-                      <a-select-option value="黄同学">黄同学</a-select-option>
-                    </a-select>
-                  </a-form-model-item>
-                  <a-form-model-item label="职位">
-                    <a-select placeholder="请选择" allowClear>
-                      <a-select-option value="王同学">王同学</a-select-option>
-                      <a-select-option value="李同学">李同学</a-select-option>
-                      <a-select-option value="黄同学">黄同学</a-select-option>
-                    </a-select>
-                  </a-form-model-item>
-                  <div class="textalginC">
-                    <a-button key="submit" type="primary" class="primarybtn btnR" @click="item.optionbtn.zfvisible = false;">
-                      确定 
-                    </a-button>
-                  </div>
-                </a-form-model>
-              </a>
-              <a-button :type="item.optionbtn.zf ==1 ?'danger':''" class=" marginleft" :class="item.optionbtn.zf ==1?'danger-from-button':'clear-from-button' ">
-                <i class="iconfont">&#xe6cf;</i> 转发
-              </a-button>
-            </a-popover>
-            <!-- 简历分组-->
-            <a-popover v-model="item.optionbtn.jlfzvisible" trigger="click" placement="bottomRight">
-              <a slot="content" >
-                <a-form-model
-                  ref="dynamicValidateForm"
-                  :model="form"
-                  layout="horizontal"
-                  class="width300 padding20"
-                  v-bind="{
-                    labelCol: { span: 6 },
-                    wrapperCol: { span: 18 },
-                  }">
-                  <a-form-model-item label="分组">
-                    <a-select placeholder="请选择" allowClear>
-                      <a-select-option value="王同学">王同学</a-select-option>
-                      <a-select-option value="李同学">李同学</a-select-option>
-                      <a-select-option value="黄同学">黄同学</a-select-option>
-                    </a-select>
-                  </a-form-model-item>
-                 <a-form-model-item label="添加小组">
-                    <a-select placeholder="请选择" allowClear>
-                      <a-select-option value="王同学">王同学</a-select-option>
-                      <a-select-option value="李同学">李同学</a-select-option>
-                      <a-select-option value="黄同学">黄同学</a-select-option>
-                    </a-select>
-                  </a-form-model-item>
-                  <div class="textalginC">
-                    <a-button key="submit" type="primary" class="primarybtn btnR" @click="item.optionbtn.jlfzvisible = false;">
-                      确定 
-                    </a-button>
-                  </div>
-                </a-form-model>
-              </a>
-              <a-button :type="item.optionbtn.jlfx ==1?'danger':''" class="marginleft" :class="item.optionbtn.jlfx ==1?'danger-from-button':'clear-from-button' ">
-                <a-icon type="profile" theme="filled" />简历分组
-              </a-button>
-            </a-popover>
-             <!-- 加入职位-->
-            <a-popover v-model="item.optionbtn.jrzwvisible" trigger="click" placement="bottomRight">
-              <a slot="content" >
-                <a-form-model
-                  ref="dynamicValidateForm"
-                  :model="form"
-                  layout="horizontal"
-                  class=" padding20">
-                  <a-form-model-item >
-                    <a-radio-group v-model="radiovalue" @change="onChange" class="Radiogroup">
-                      <a-row v-for="(item1,index) in item.zhiweilist" :key="index" class="rowRadioStyle">
-                          <a-radio :value="item1.id" class="radioStyle">
-                            <span>{{ item1.name }}</span>
-                          </a-radio>
-                      </a-row>
-                    </a-radio-group>
-                  </a-form-model-item>
-                  <div class="textalginC">
-                    <a-button key="submit" type="primary" class="primarybtn btnR" @click="item.optionbtn.jrzwvisible = false;">
-                      确定 
-                    </a-button>
-                  </div>
-                </a-form-model>
-              </a>
-              <a-button :type="item.optionbtn.jrzw ==1?'danger':''" class="marginleft" :class="item.optionbtn.jrzw ==1?'danger-from-button':'clear-from-button' ">
-                <a-icon type="plus-circle" theme="filled" />加入职位
-              </a-button> 
-            </a-popover>
+            <detailsForward :status="item.optionbtn.zf" />
+						<detailsJoinposition :status="item.optionbtn.jlfx" />
+						<detailsGruop :status="item.optionbtn.jrzw" />
           </div>
         </a-col>
       </a-row>
@@ -315,6 +213,10 @@
 </template>
 
 <script>
+import detailsForward from './components/detailsForward' //转发
+import detailsJoinposition from './components/detailsJoinposition' //加入职位
+import detailsGruop from './components/detailsGruop' //简历分组
+
 import logom from '@/assets/img/logom.png'
 import logof from '@/assets/img/logof.png'
 const cityList = [
@@ -597,6 +499,11 @@ export default {
       },
     }
   },
+  components:{
+		detailsForward,
+		detailsJoinposition,
+		detailsGruop,
+	},
   created () {
     
   },
@@ -612,6 +519,10 @@ export default {
     onChange(e) {
       console.log('radio checked', e.target.value);
 		},
+    goDetails(id){
+      console.log(id);
+      this.$router.push({path:'/resumeDetails'});
+    }
   },
 }
 </script>
@@ -645,6 +556,7 @@ export default {
   /* 简历信息 */
   .peopleItem{
     /* height: 254px; */
+    cursor: pointer;
     background: #fff;
     padding: 18px;
     box-sizing: border-box;
