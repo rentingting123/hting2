@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false" class="cardBox">
     <div class="talenth2">人才推荐报告</div>
-		<div class="primColor infobox marginB">
+		<div class="primColor infobox fromMargin">
 			<span>推荐职位：{{reportData.info.job}}</span>
 			<span>推荐顾问：{{reportData.info.guwen}}</span>
 			<span>联系方式：{{reportData.info.tel}}</span>
