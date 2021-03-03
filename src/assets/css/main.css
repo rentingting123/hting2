@@ -56,19 +56,19 @@
   line-height: 25px;
 }
 .primColor {
-  color: #435EBE;
+  color: #435EBE !important;
 }
 .redColor {
-  color: #FD4944;
+  color: #FD4944 !important;
 }
 .yellowColor {
-  color: #FF9919;
+  color: #FF9919 !important;
 }
 .grayColor {
-  color: #999999;
+  color: #999999 !important;
 }
 .greenColor {
-  color: #56C8E9;
+  color: #56C8E9 !important;
 }
 .fontSize20 {
   font-size: 20px;

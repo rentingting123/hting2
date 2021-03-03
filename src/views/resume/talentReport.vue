@@ -2,31 +2,161 @@
   <a-card :bordered="false" class="cardBox">
     <div class="talenth2">人才推荐报告</div>
 		<div class="primColor infobox marginB">
-			<spna>推荐职位：{{reportData.info.job}}</spna>
-			<spna>推荐顾问：{{reportData.info.guwen}}</spna>
-			<spna>联系方式：{{reportData.info.tel}}</spna>
-			<spna>推荐时间：{{reportData.info.time}}</spna>
+			<span>推荐职位：{{reportData.info.job}}</span>
+			<span>推荐顾问：{{reportData.info.guwen}}</span>
+			<span>联系方式：{{reportData.info.tel}}</span>
+			<span>推荐时间：{{reportData.info.time}}</span>
 		</div>
     <Title title='推荐理由'></Title>
-		<div class="liyou">
-			<p>匹配度评估：
+		<a-descriptions  :column="4" class="marginB">
+			<a-descriptions-item label="匹配度评估">
 				<span class="redColor">{{ reportData.liyou.ppd }}</span>
-			</p>
-			<p>意向度评估：<span class="yellowColor">{{ reportData.liyou.yxd }}</span></p>
-			<p>可面试时间：<span>{{ reportData.liyou.msTime }}</span></p>
-			<p>可到岗时间：<span>{{ reportData.liyou.dgTime }}</span></p>
-			<p>家庭婚育情况：<span>{{ reportData.liyou.dgTime }}</span></p>
-			<p>看新机会的原因：<span>{{ reportData.liyou.reason }}</span></p>
-			<p>其它offer情况：<span>{{ reportData.liyou.otheroffer }}</span></p>
+			</a-descriptions-item>
+			<a-descriptions-item label="意向度评估">
+				<span class="yellowColor">{{ reportData.liyou.yxd }}</span>
+			</a-descriptions-item>
+			<a-descriptions-item label="可面试时间">
+				{{ reportData.liyou.msTime }}
+			</a-descriptions-item>
+			<a-descriptions-item label="可到岗时间" >
+				{{ reportData.liyou.dgTime }}
+			</a-descriptions-item>
+			<a-descriptions-item label="家庭婚育情况" :span="2">
+				{{ reportData.liyou.education }}
+			</a-descriptions-item>
+			<a-descriptions-item label="看新机会的原因" :span="2">
+				{{ reportData.liyou.reason }}
+			</a-descriptions-item>
+			<a-descriptions-item label="其它offer情况" :span="2">
+				{{ reportData.liyou.otheroffer }}
+			</a-descriptions-item>
+		</a-descriptions>
+		<div class="primColor youshitit">对该职位的优/劣势：</div>
+		<div class="marginB">
+			<div v-for="(item,index) in reportData.youshi" :key="index" class="youshi">
+				{{ item.text }}
+			</div>
 		</div>
-		<div class="primColor">对该职位的优/劣势：</div>
 		<Title title='基本信息'></Title>
-		<Title title='职业期望'></Title>	 
+		<a-descriptions  :column="3" class="marginB">
+			<a-descriptions-item label="姓名">
+				{{ reportData.jibeninfo.name }}
+			</a-descriptions-item>
+			<a-descriptions-item label="性别">
+				{{ reportData.jibeninfo.sex }}
+			</a-descriptions-item>
+			<a-descriptions-item label="目前年薪">
+				{{ reportData.jibeninfo.money }}
+			</a-descriptions-item>
+			<a-descriptions-item label="手机号码" >
+				{{ reportData.jibeninfo.tel }}
+			</a-descriptions-item>
+			<a-descriptions-item label="邮箱" >
+				{{ reportData.jibeninfo.emil }}
+			</a-descriptions-item>
+			<a-descriptions-item label="出生日期" >
+				{{ reportData.jibeninfo.brith }}
+			</a-descriptions-item>
+			<a-descriptions-item label="户口" >
+				{{ reportData.jibeninfo.hukou }}
+			</a-descriptions-item>
+			<a-descriptions-item label="所在城市">
+				{{ reportData.jibeninfo.city }}
+			</a-descriptions-item>
+		</a-descriptions>
+		<Title title='职业期望'></Title>
+		<a-descriptions  :column="4" class="marginB">
+			<a-descriptions-item label="期望职位" :span="2">
+				{{ reportData.job.job }}
+			</a-descriptions-item>
+			<a-descriptions-item label="期望地点" :span="2">
+				{{ reportData.job.address }}
+			</a-descriptions-item>
+			<a-descriptions-item label="期望薪资" :span="2">
+				{{ reportData.job.money }}
+			</a-descriptions-item>
+			<a-descriptions-item label="期望行业" :span="2">
+				{{ reportData.job.hangye }}
+			</a-descriptions-item>
+		</a-descriptions>
 		<Title title='教育经验'></Title>
+		<a-descriptions layout="vertical" :column="4" :colon="false" class="marginB">
+			<a-descriptions-item label="起止时间">
+				{{ reportData.education.time }}
+			</a-descriptions-item>
+			<a-descriptions-item label="学校名称">
+				{{ reportData.education.school }}
+			</a-descriptions-item>
+			<a-descriptions-item label="专业">
+				{{ reportData.education.major }}
+			</a-descriptions-item>
+			<a-descriptions-item label="学历" >
+				{{ reportData.education.education }}
+			</a-descriptions-item>
+		</a-descriptions>
 		<Title title='语言水平'></Title>
-		<Title title='职业速览'></Title>	 
+		<div class="language marginB" >
+			{{ reportData.language.name }}
+			<a-tag class="tags" v-for="(item, index) in reportData.language.tags" :key="index">
+        {{ item }}
+      </a-tag>
+		</div>
+		<Title title='职业速览'></Title>
+		<div  class="marginB">
+			<div v-for="(item, index) in reportData.occupation" :key="index" class="occupation">
+				<span class="primColor marginr">{{ item.time }}</span>
+				<span>{{ item.job }}</span>/
+				<span class="company">{{ item.company }}</span>
+			</div>
+		</div>
 		<Title title='工作经验'></Title>
+		<div class="marginB">
+			<div class="occupation">
+				<span class="primColor marginr">{{ reportData.experience.name }}</span>
+				<span class="company">{{ reportData.experience.time }}</span>
+			</div>
+			<a-descriptions  :column="3" class="marginTop">
+				<a-descriptions-item label="所任职位">
+					{{ reportData.experience.job }}
+				</a-descriptions-item>
+				<a-descriptions-item label="公司性质">
+					{{ reportData.experience.xingzhi }}
+				</a-descriptions-item>
+				<a-descriptions-item label="公司规模">
+					{{ reportData.experience.people }}
+				</a-descriptions-item>
+				<a-descriptions-item label="下属人数" >
+					{{ reportData.experience.xsnum }}
+				</a-descriptions-item>
+				<a-descriptions-item label="汇报对象" :span="2">
+					{{ reportData.experience.object }}
+				</a-descriptions-item>
+				<a-descriptions-item label="公司介绍" :span="4">
+					{{ reportData.experience.companyinfo }}
+				</a-descriptions-item>
+				<a-descriptions-item label="工作职责" :span="4">
+					{{ reportData.experience.work }}
+				</a-descriptions-item>
+				<a-descriptions-item label="工作业绩" :span="4">
+					{{ reportData.experience.yeji }}
+				</a-descriptions-item>
+			</a-descriptions>
+		</div>
 		<Title title='工作经验'></Title>
+		<div class="marginB">
+			<div class="occupation">
+				<span class="primColor marginr">{{ reportData.peoject.name }}</span>
+				<span class="company">{{ reportData.peoject.time }}</span>
+			</div>
+			<a-descriptions class="marginTop">
+				<a-descriptions-item label="项目职务" :span="4">
+					{{ reportData.peoject.zhiwu }}
+				</a-descriptions-item>
+				<a-descriptions-item label="项目描述" :span="4">
+					{{ reportData.peoject.miaoshu }}
+				</a-descriptions-item>
+			</a-descriptions>
+		</div>
   </a-card>
 </template>
 
@@ -85,7 +215,7 @@ const reportData={
 		education:'本科'
 	},
 	language:{
-		name:"本科",
+		name:"英语",
 		tags:['读写清晰','听说良好']
 	},
 	occupation:[
@@ -169,7 +299,49 @@ export default {
 	.liyou p{
 		min-width: 240px;
 	}
-	.liyou p>span{
-		font-weight: 600;
+	.liyou p span{
+		color: #111;
+		/* font-weight: 600; */
+	}
+	.youshi{
+		height: 30px;
+		line-height: 30px;
+		position: relative;
+		padding-left: 10px;
+		/* font-size: 18px; */
+	}
+	.youshitit{
+		margin: 16px 0;
+		font-size: 18px; 
+	}
+	.language{
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+		color: #282828FF;
+	}
+	.youshi::after,.occupation::after{
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 10px;
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background-color: #FF6864FF;
+	}
+	.language .tags{
+		background:#F1F7FFFF;
+		color:#435EBEFF;
+		border:none;
+		margin-left: 10px;
+	}
+	.occupation{
+		font-size: 16px;
+		position: relative;
+		padding-left: 10px;
+	}
+	.occupation .company{
+		font-size: 12px;
 	}
 </style>
