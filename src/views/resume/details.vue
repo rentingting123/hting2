@@ -48,51 +48,7 @@
           </div>
 			</div>
 		</div>
-		<div class="marginTB">
-			<a-button
-				:type="showBtn === 1?'primary':''"
-				:class="showBtn === 1?'primarybtn':'' "
-				@click="btnChange(1)">
-				推荐详情
-			</a-button>
-      <a-button
-				:type="showBtn === 2?'primary':''"
-				:class="showBtn === 2?'primarybtn':'' "
-				class="marginleft"
-				@click="btnChange(2)">
-				职位详情
-			</a-button>
-		</div>
-		<a-tabs v-if="showBtn === 1" class="tabs" :tabBarStyle="{borderBottom: 'none'}" >
-      <a-tab-pane key="1" tab="全部(26)">
-        <detailsTable />
-      </a-tab-pane>
-      <a-tab-pane key="2" tab="待处理(26)">
-       <detailsTable />
-      </a-tab-pane>
-      <a-tab-pane key="3" tab="推荐(26)">
-        <detailsTable />
-      </a-tab-pane>
-      <a-tab-pane key="4" tab="初试(26)">
-        <detailsTable />
-      </a-tab-pane>
-			<a-tab-pane key="5" tab="复试(26)">
-        <detailsTable />
-      </a-tab-pane>
-      <a-tab-pane key="6" tab="offer(26)">
-       <detailsTable />
-      </a-tab-pane>
-      <a-tab-pane key="7" tab="入职(26)">
-        <detailsTable />
-      </a-tab-pane>
-      <a-tab-pane key="8" tab="过保(26)">
-        <detailsTable />
-      </a-tab-pane>
-			<a-tab-pane key="9" tab="不合适(26)">
-        <detailsTable />
-      </a-tab-pane>
-    </a-tabs>
-		<a-row v-if="showBtn === 2" :gutter="24">
+		<a-row :gutter="12">
 			<a-col :sm="24" :md="12" :xl="14" >
 				<detailsPL />
 			</a-col>
@@ -108,7 +64,6 @@ import detailsForward from './components/detailsForward' //转发
 import detailsJoinposition from './components/detailsJoinposition' //加入职位
 import detailsGruop from './components/detailsGruop' //简历分组
 
-import detailsTable from './components/detailsTable'
 import detailsPL from './components/detailsPL'
 import detailsPR from './components/detailsPR'
 
@@ -154,7 +109,6 @@ export default {
 		detailsJoinposition,
 		detailsGruop,
 
-		detailsTable,
 		detailsPL,
 		detailsPR
 	},

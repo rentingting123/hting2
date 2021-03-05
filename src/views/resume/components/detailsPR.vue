@@ -1,99 +1,82 @@
 <template>
   <div>
-    <a-card :bordered="false" class="cardBox">
-      <div>
-        <Title title='公司详情' type='1'></Title>
-        <div class="company">
-          <img class="img" :src="data.company.img" alt="">
-          <div class="infobox">
-            <div  class="fontSize26 redColor">{{data.company.name}}</div>
-            <div class="info">
-              <div>{{data.company.address}} {{data.company.people}} {{data.company.status}}</div>
-              <div class="primColor">联系人：{{data.company.contact}}</div>
+   <a-tabs class="tabs" :tabBarStyle="{borderBottom: 'none',marginTop: 0}" >  
+    <a-tab-pane key="1" tab="沟通记录" >
+      <a-card :bordered="false" class="cardBox">
+        <a-textarea rows="3" placeholder="请输入沟通记录" v-model="communicate"></a-textarea>
+        <div class="addbtn">
+          <a-button type="danger" @click="addCommunicate" >添加</a-button>
+        </div>
+        <a-radio-group
+          v-model="mode"
+          default-value="1"
+          button-style="solid">
+          <a-radio-button :value="1">
+             全部记录
+          </a-radio-button>
+          <a-radio-button :value="2">
+            我的记录
+          </a-radio-button>
+          <a-radio-button :value="3">
+            只含@我的
+          </a-radio-button>
+        </a-radio-group>
+        <div class="communicate">
+          <div v-for="(item,index) in communicateList" :key="index" class="contactbg1">
+            <div class="commuitinfo">
+              <span class="name">{{ item.name }}</span>
+              <span class="time">{{ item.time }}</span>
             </div>
+            <div>{{ item.content}}</div>
           </div>
         </div>
-      </div>
-      <div>
-        <Title title='联系人'></Title>
-        <div class="contactbg">
-          <a-row v-for="(item ,index) in data.contact" :key="index" class="arow">
-            <a-col :lg="7" :md="12" :sm="24">
-              <span>{{ item.name }}</span>
-              <span class="primColor"> /{{item.job}}</span>
-            </a-col>
-            <a-col :lg="7" :md="12" :sm="24">
-              <div class="iconbg"><i class="iconfont">&#xe660;</i></div>
-              {{ item.tel }}
-            </a-col>
-            <a-col :lg="10" :md="12" :sm="24">
-              <div class="iconbg"><i class="iconfont">&#xe605;</i></div>
-              {{ item.eail }}
-            </a-col>
-          </a-row>
+      </a-card>
+    </a-tab-pane>
+    <a-tab-pane key="2" tab="推荐记录">
+      <a-button slot="tabBarExtraContent" type="danger" class="danger-from-button">
+        <a-icon type="plus-circle" theme="filled" />推荐职位
+      </a-button>
+      <div class="marginB recordbox" v-for="(item,index) in recordlist"
+          :key="index">
+        <a-descriptions :column="2" >
+          <a-descriptions-item label="推荐职位">
+            {{ item.job }}
+          </a-descriptions-item>
+          <a-descriptions-item label="推荐公司">
+            {{ item.com }}
+          </a-descriptions-item>
+          <a-descriptions-item label="匹配度">
+            {{ item.ppd }}
+          </a-descriptions-item>
+          <a-descriptions-item label="意向度">
+            {{ item.yxd }}
+          </a-descriptions-item>
+          <a-descriptions-item label="推荐时间" >
+            {{ item.time }}
+          </a-descriptions-item>
+          <a-descriptions-item label="推荐顾问">
+            {{ item.guwen }}
+          </a-descriptions-item>
+          <a-descriptions-item label="当前推进状态" :span="2">
+            <span  v-if="item.status===2" class="sunColor">合适</span>
+            <span v-else class="errColor">不合适</span>  
+          </a-descriptions-item>
+        </a-descriptions>
+        <div class="textRight">
+          <a-button size="small" type="primary" class="primarybtn marginr">
+            导出报告
+          </a-button>
+          <a-button size="small" class="clear-from-button1">
+            查看详情
+          </a-button>
         </div>
       </div>
-      <div class="marginB">
-        <Title title='其它职位'></Title>
-        <div class="contactbg1">
-          <a-row v-for="(item ,index) in data.otherJob" :key="index" class="arow">
-            <a-col>
-              <span class="primColor">{{ item.name }}</span>
-              <span> （{{item.introduce}}）</span>
-            </a-col>
-          </a-row>
-        </div>
-      </div>
-      <div class="marginB">
-        <Title title='公司介绍'></Title>
-        <div class="contactbg1">
-          {{ data.introduce }}
-        </div>
-      </div>
-      <div>
-        <Title title='高管介绍'></Title>
-        <div class="contactbg1">
-          <div class="senior" v-for="(item ,index) in data.senior" :key="index">
-            <div class="seniorinfo">
-              <span class="fontSize20">{{ item.name }}</span>
-              <span class="primColor"> / {{item.job}}</span>  
-            </div>
-            <div>{{item.content}}</div>
-          </div>
-        </div>
-      </div>
-    </a-card>
-    <a-card :bordered="false" class="cardBox">
-      <a-textarea rows="4" placeholder="请输入文字" v-model="communicate"></a-textarea>
-      <div class="addbtn">
-        <a-button type="danger" @click="addCommunicate" >添加</a-button>
-      </div>
-      <a-radio-group
-        v-model="mode"
-        default-value="1"
-        button-style="solid">
-        <a-radio-button :value="1">
-          我的沟通记录
-        </a-radio-button>
-        <a-radio-button :value="2">
-          全部沟通记录
-        </a-radio-button>
-      </a-radio-group>
-      <div class="communicate">
-        <div v-for="(item,index) in communicateList" :key="index" class="contactbg1">
-          <div class="commuitinfo">
-            <span class="name">{{ item.name }}</span>
-            <span class="time">{{ item.time }}</span>
-          </div>
-          <div>{{ item.content}}</div>
-        </div>
-      </div>
-    </a-card>
+    </a-tab-pane>
+   </a-tabs>
   </div>
 </template>
 <script>
-import Title from '@/components/title'
-// import * as IconSelf from '@/assets/icons/index'
+
 const data =  {
   company:{
     img: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20170825%2F726d7b65bcaf4f4eaff6eab4ba03db2b.png&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614497618&t=e77cc9ab4eba49840f12865a3840bd30',
@@ -141,6 +124,38 @@ const data =  {
     },
   ]
 }
+const recordlist = [
+  {
+    id:1,
+    job:"CTO",
+    com:'阿里巴巴',
+    ppd:"高",
+    yxd:"低",
+    time:"2021/1/20",
+    guwen:"2021/1/20",
+    status:1
+  },
+  {
+    id:2,
+    job:"CTO",
+    com:'阿里巴巴',
+    ppd:"高",
+    yxd:"低",
+    time:"2021/1/20",
+    guwen:"2021/1/20",
+    status:2
+  },
+  {
+    id:3,
+    job:"CTO",
+    com:'阿里巴巴',
+    ppd:"高",
+    yxd:"低",
+    time:"2021/1/20",
+    guwen:"2021/1/20",
+    status:2
+  }
+];
 const communicateList = [
   {
     name:'张三',
@@ -157,14 +172,14 @@ export default {
   data() {
     return {
       data,
+      recordlist,//推荐记录
       communicate: '', // 沟通记录内容
       mode: 1,
       communicateList
     };
   },
   components: {
-    Title,
-    // tel: IconSelf.tel
+
 	},
 	methods: {
 		handlePagination(pagination){
