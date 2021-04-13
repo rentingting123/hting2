@@ -3,18 +3,6 @@
     <div class="leftimg"></div>
     <div class="infobox">
       <div class="logotitle">Hello,欢迎登录Dhunting！</div>
-      <a-row class="marginTB logintabs">
-        <a-space>
-          <a-button
-            v-for="item in userList"
-            :key="item.id"
-            :type="showBtn === item.id?'primary':''"
-            :class="showBtn === item.id?'primarybtn':'' "
-            @click="btnChange(item.id)">
-            {{item.name}}
-          </a-button>
-        </a-space>
-      </a-row>
       <a-tabs default-active-key="1" class="logintabs">
         <a-tab-pane key="1" tab="账号密码登录" >
           <loginTel class="ant-tabs-tabpane"></loginTel>
@@ -37,27 +25,10 @@ export default {
   },
   data() {
     return {
-      showBtn: 1,
-      userList:[
-        {
-          id: 1,
-          name: "求职者"
-        },
-        {
-          id: 2,
-          name: "猎头顾问"
-        },{
-          id: 3,
-          name: "企业HR"
-        }
-      ]
+
     };
   },
   methods: {
-    // 按钮切换
-		btnChange(i){
-			this.showBtn = i
-		}
   },
 }
 </script>
@@ -96,8 +67,8 @@ export default {
  }
  .logintabs{
   width: 80%;
-  /* flex:1; */
-  /* padding-top: 40px; */
+  flex:1;
+  padding-top: 40px;
  }
  .logintabs .ant-tabs-tabpane {
   display: flex;
@@ -105,5 +76,6 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   height: 400px;
+  padding-top: 20px;
 }
 </style>
