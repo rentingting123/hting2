@@ -25,7 +25,7 @@
           ]">
           记住密码
         </a-checkbox>
-        <a-button type="link" class="loginForgot" v-if='type === 1'>
+        <a-button  v-if='type === 1' type="link" class="loginForgot" @click="loginForgot">
           忘记密码？
         </a-button>
       </div>
@@ -47,13 +47,15 @@
         </router-link>
       </div>
     </div>
+    <ForgotPassword :visible="visibleForgot"/>
   </div>
 </template>
 <script>
-
+import ForgotPassword from './forgotPassword'
 export default {
   name: 'Home',
   components: {
+    ForgotPassword
   },
   props: {
     userList: {
@@ -67,18 +69,24 @@ export default {
   data() {
     return {
       showBtn: 1,
+      visibleForgot: false
     };
   },
   methods: {
     // 按钮切换
 		btnChange(i){
 			this.showBtn = i
-		}
+		},
+    // 添加部门
+		loginForgot(){
+			this.visibleForgot = true
+		},
   },
 }
 </script>
 <style lang="less" scoped >
 @import '@/assets/css/main.less'; // 用于覆盖上面定义的变量. 全局变量
+@import '@/assets/css/login.less'; // 登录模块
   .login{
     width:100%;
     height: 100vh;
