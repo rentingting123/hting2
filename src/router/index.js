@@ -20,9 +20,10 @@ import customerDetails from '@/views/customer/details'
 
 import operate from '@/views/operate'
 import myInfo from '@/views/myInfo'
+//登录
 import login from '@/views/login/login'
-
-
+import register from '@/views/login/register'
+import applyUse from '@/views/login/applyUse'
 
 // import NotFound from '@/views/NotFound'
 
@@ -170,8 +171,18 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'login',
+    name: '登录',
     component: login
+  },
+  {
+    path: '/register',
+    name: '注册',
+    component: register
+  },
+  {
+    path: '/applyUse',
+    name: '申请试用',
+    component: applyUse
   },
 ]
 
