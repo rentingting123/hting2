@@ -14,7 +14,7 @@
     "core-js": "^3.6.5",
     "echarts": "^5.0.1",
     "less": "^2.7.3",
-    "less-loader": "4.1.0",
+    "less-loader": "6.0.0",
     "qs": "^6.9.6",
     "relation-graph": "^1.1.0",
     "vue": "^2.6.11",

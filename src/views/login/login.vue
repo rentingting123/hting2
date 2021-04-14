@@ -61,18 +61,27 @@ export default {
   },
 }
 </script>
-<style scoped>
+<style lang="less" scoped >
+@import '@/assets/css/main.less'; // 用于覆盖上面定义的变量. 全局变量
   .login{
     width:100%;
     height: 100vh;
     background:#e9edf8;
     display: flex;
  }
+ .logotitle{
+    text-align: center;
+    font-size: @font-size-40;
+    font-family: Lantinghei SC;
+    font-weight: 540;
+    color: @link-color; 
+ }
   .leftimg{
     width: 50%;
     height: 100%;
     background: url("../../assets/img/loginbg.png") no-repeat left center;
     background-size: cover;
+    // margin-left: -60px;
   }
  .infobox{
     width: 50%;
@@ -86,18 +95,11 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    
  }
- .logotitle{
-    text-align: center;
-    font-size: 40px;
-    font-family: Lantinghei SC;
-    font-weight: 540;
-    color: #3A54B6;
- }
+
  .logintabs{
   width: 80%;
-  /* flex:1; */
-  /* padding-top: 40px; */
  }
  .logintabs .ant-tabs-tabpane {
   display: flex;

@@ -2672,7 +2672,7 @@ clone@^1.0.2:
   resolved "https://registry.npm.taobao.org/clone/download/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
-clone@^2.1.1:
+clone@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/clone/download/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
   integrity sha1-G39Ln1kfHo+DZwQBYANFoCiHQ18=
@@ -2888,6 +2888,13 @@ cookie@0.4.0:
   version "0.4.0"
   resolved "https://registry.npm.taobao.org/cookie/download/cookie-0.4.0.tgz#beb437e7022b3b6d49019d088665303ebe9c14ba"
   integrity sha1-vrQ35wIrO21JAZ0IhmUwPr6cFLo=
+
+copy-anything@^2.0.1:
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/copy-anything/download/copy-anything-2.0.3.tgz#842407ba02466b0df844819bbe3baebbe5d45d87"
+  integrity sha1-hCQHugJGaw34RIGbvjuuu+XUXYc=
+  dependencies:
+    is-what "^3.12.0"
 
 copy-concurrently@^1.0.0:
   version "1.0.5"
@@ -5347,6 +5354,11 @@ is-utf8@^0.2.0:
   resolved "https://registry.npm.taobao.org/is-utf8/download/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
   integrity sha1-Sw2hRCEE0bM2NA6AeX6GXPOffXI=
 
+is-what@^3.12.0:
+  version "3.14.1"
+  resolved "https://registry.npm.taobao.org/is-what/download/is-what-3.14.1.tgz#e1222f46ddda85dead0fd1c9df131760e77755c1"
+  integrity sha1-4SIvRt3ahd6tD9HJ3xMXYOd3VcE=
+
 is-windows@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/is-windows/download/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
@@ -5596,14 +5608,15 @@ launch-editor@^2.2.1:
     chalk "^2.3.0"
     shell-quote "^1.6.1"
 
-less-loader@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.npm.taobao.org/less-loader/download/less-loader-4.1.0.tgz#2c1352c5b09a4f84101490274fd51674de41363e"
-  integrity sha1-LBNSxbCaT4QQFJAnT9UWdN5BNj4=
+less-loader@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npm.taobao.org/less-loader/download/less-loader-6.0.0.tgz?cache=0&sync_timestamp=1617983468127&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fless-loader%2Fdownload%2Fless-loader-6.0.0.tgz#f7833177c2fc3de5014de072d5c26eca0954c1cb"
+  integrity sha1-94Mxd8L8PeUBTeBy1cJuyglUwcs=
   dependencies:
-    clone "^2.1.1"
-    loader-utils "^1.1.0"
-    pify "^3.0.0"
+    clone "^2.1.2"
+    less "^3.11.1"
+    loader-utils "^2.0.0"
+    schema-utils "^2.6.6"
 
 less@^2.7.3:
   version "2.7.3"
@@ -5618,6 +5631,22 @@ less@^2.7.3:
     promise "^7.1.1"
     request "2.81.0"
     source-map "^0.5.3"
+
+less@^3.11.1:
+  version "3.13.1"
+  resolved "https://registry.npm.taobao.org/less/download/less-3.13.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fless%2Fdownload%2Fless-3.13.1.tgz#0ebc91d2a0e9c0c6735b83d496b0ab0583077909"
+  integrity sha1-DryR0qDpwMZzW4PUlrCrBYMHeQk=
+  dependencies:
+    copy-anything "^2.0.1"
+    tslib "^1.10.0"
+  optionalDependencies:
+    errno "^0.1.1"
+    graceful-fs "^4.1.2"
+    image-size "~0.5.0"
+    make-dir "^2.1.0"
+    mime "^1.4.1"
+    native-request "^1.0.5"
+    source-map "~0.6.0"
 
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
@@ -5786,7 +5815,7 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-make-dir@^2.0.0:
+make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/make-dir/download/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
   integrity sha1-XwMQ4YuL6JjMBwCSlaMK5B6R5vU=
@@ -5940,7 +5969,7 @@ mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.19, mime-types@~2.1.24, 
   dependencies:
     mime-db "1.45.0"
 
-mime@1.6.0, mime@^1.2.11:
+mime@1.6.0, mime@^1.2.11, mime@^1.4.1:
   version "1.6.0"
   resolved "https://registry.npm.taobao.org/mime/download/mime-1.6.0.tgz?cache=0&sync_timestamp=1610756443337&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmime%2Fdownload%2Fmime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=
@@ -6146,6 +6175,11 @@ nanopop@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/nanopop/download/nanopop-2.1.0.tgz?cache=0&sync_timestamp=1598256086791&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnanopop%2Fdownload%2Fnanopop-2.1.0.tgz#23476513cee2405888afd2e8a4b54066b70b9e60"
   integrity sha1-I0dlE87iQFiIr9LopLVAZrcLnmA=
+
+native-request@^1.0.5:
+  version "1.0.8"
+  resolved "https://registry.npm.taobao.org/native-request/download/native-request-1.0.8.tgz?cache=0&sync_timestamp=1603412804149&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnative-request%2Fdownload%2Fnative-request-1.0.8.tgz#8f66bf606e0f7ea27c0e5995eb2f5d03e33ae6fb"
+  integrity sha1-j2a/YG4PfqJ8DlmV6y9dA+M65vs=
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -8800,7 +8834,7 @@ tslib@2.0.3:
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-2.0.3.tgz?cache=0&sync_timestamp=1609887785854&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-2.0.3.tgz#8e0741ac45fc0c226e58a17bfc3e64b9bc6ca61c"
   integrity sha1-jgdBrEX8DCJuWKF7/D5kubxsphw=
 
-tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.14.1.tgz?cache=0&sync_timestamp=1609887785854&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftslib%2Fdownload%2Ftslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha1-zy04vcNKE0vK8QkcQfZhni9nLQA=

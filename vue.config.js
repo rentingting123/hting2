@@ -4,23 +4,11 @@ module.exports = {
       less: {
         lessOptions: {
           modifyVars: {
-            'primary-color': '#ff0',
-            'link-color': '#ff0',
-            'border-radius-base': '2px',
+            '@primary-color': '#435EBE', // 全局主色
+            '@link-color':' #435EBE', // 链接色
           },
           javascriptEnabled: true
         }
-      }
-    }
-  },
-  devServer: {
-    proxy: {
-      '/api': {     //这里最好有一个 /
-          target: 'http://47.114.156.143:9090',  // 后台接口域名
-          changeOrigin: true,  //是否跨域
-          pathRewrite:{
-              '^/api':''
-          }
       }
     }
   }
