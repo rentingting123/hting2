@@ -47,7 +47,7 @@
         </router-link>
       </div>
     </div>
-    <ForgotPassword :visible="visibleForgot"/>
+    <ForgotPassword :visible="visible" @visibleCancel="visibleCancel()"/>
   </div>
 </template>
 <script>
@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       showBtn: 1,
-      visibleForgot: false
+      visible: false
     };
   },
   methods: {
@@ -79,14 +79,18 @@ export default {
 		},
     // 添加部门
 		loginForgot(){
-			this.visibleForgot = true
+			this.visible = true
 		},
+    // 弹框回调
+    visibleCancel(){
+			this.visible = false
+		}
   },
 }
 </script>
 <style lang="less" scoped >
 @import '@/assets/css/main.less'; // 用于覆盖上面定义的变量. 全局变量
-@import '@/assets/css/login.less'; // 登录模块
+@import '@/assets/css/page/login.less'; // 登录模块
   .login{
     width:100%;
     height: 100vh;

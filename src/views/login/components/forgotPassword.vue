@@ -3,8 +3,7 @@
     <a-modal
 			v-model="visible"
 			title="忘记密码"
-			on-ok="handleOk"
-			@cancel="handleCancel"
+      :footer="null"
 			>
 		<template slot="closeIcon">
 			<a-icon type="close-circle" theme="filled" @click="handleCancel"/>
@@ -39,53 +38,70 @@
           placeholder="请输入您的密码"
         />
       </a-form-item>
+      <a-form-model-item class="textAC">
+        <a-space>
+          <a-button @click="handleCancel" class="clear-from-button1 btnR">
+            取消
+          </a-button>
+          <a-button
+            type="primary"
+            class="primarybtn btnR marginleft"
+            @click="handleOk"
+            >
+            确定
+          </a-button>
+        </a-space>
+			</a-form-model-item>
     </a-form>
     </a-modal>
   </div>
 </template>
 <script>
-import {goLogin} from "@/api/Interface/index"
-export default {
-  data() {
-    return {
-      codeText: "获取验证码",
-      form: this.$form.createForm(this, { name: 'formRegister' }),
-    };
-  },
-  props:['visible'],
-  methods: {
-    handleOk() {
-      setTimeout(() => {
+  import {goLogin} from "@/api/Interface/index"
+  export default {
+    data() {
+      return {
+        codeText: "获取验证码",
+        form: this.$form.createForm(this, { name: 'formRegister' }),
+      };
+    },
+    props:['visible'],
+    methods: {
+      handleOk() {
+        setTimeout(() => {
+          this.$emit('visibleCancel');
+        }, 0);
+      },
+      handleCancel() {
         this.$emit('visibleCancel');
-      }, 3000);
-    },
-    handleCancel() {
-      this.$emit('visibleCancel');
-		},
-    handleSubmit(e) {
-      e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-          let obj = {
-            account: values.account,
-            password: values.password
-          }
-          goLogin(obj).then(res=>{
-            if(res.data.code === 1 ){
-              this.$router.push("/Home")
-              this.$message.success(res.data.message);
-            }else{
-              this.$message.error(res.data.message);
+      },
+      handleSubmit(e) {
+        e.preventDefault();
+        this.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+            let obj = {
+              account: values.account,
+              password: values.password
             }
-          })
-        }
-      });
+            goLogin(obj).then(res=>{
+              if(res.data.code === 1 ){
+                this.$router.push("/Home")
+                this.$message.success(res.data.message);
+              }else{
+                this.$message.error(res.data.message);
+              }
+            })
+          }
+        });
+      },
+      // 验证码点击
+      onSearch(value) {
+        console.log(value);
+      },
     },
-    // 验证码点击
-    onSearch(value) {
-      console.log(value);
-    },
-  },
-};
+  };
 </script>
+<style  lang="less">
+  @import '@/assets/css/modules/modal.less'; // 登录模块
+</style>

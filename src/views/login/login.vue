@@ -142,7 +142,7 @@ export default {
 </script>
 <style lang="less" scoped >
 @import '@/assets/css/main.less'; // 用于覆盖上面定义的变量. 全局变量
-@import '@/assets/css/login.less'; // 登录模块
+@import '@/assets/css/page/login.less'; // 登录模块
  .logintabs{
   width: 80%;
  }

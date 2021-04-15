@@ -195,6 +195,7 @@ export default {
 		},
 		// 关闭弹框
 		visibleCancel(i){
+       console.log('取消11');
       if(i === 1){
         // 添加人员
 				this.visiblePeolple = false 

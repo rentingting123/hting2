@@ -126,6 +126,6 @@ export default {
 }
 </script>
 <style lang="less" scoped >
-@import '@/assets/css/login.less'; // 登录模块
+@import '@/assets/css/page/login.less'; // 登录模块
 
 </style>
