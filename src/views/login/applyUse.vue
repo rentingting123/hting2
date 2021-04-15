@@ -9,7 +9,7 @@
         :form="form"
         class="width80"
         :label-col="{ span: 4 }"
-        :wrapper-col="{ span: 19 }"
+        :wrapper-col="{ span: 20 }"
         labelAlign="left"
         @submit="handleSubmit"
         :hideRequiredMark="true"
@@ -64,8 +64,8 @@
             placeholder="请输入您的密码"
           />
         </a-form-item> -->
-        <a-form-item :label-col="{ span: 0 }" :wrapper-col="{ span: 22 }">
-          <a-button type="danger" block html-type="submit" class="login-form-button">
+        <a-form-item :label-col="{ span: 0 }" :wrapper-col="{ span: 24 }">
+          <a-button type="danger" block html-type="submit" size="large" >
             确定
           </a-button>
         </a-form-item>

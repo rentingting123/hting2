@@ -11,8 +11,8 @@
      <a-form
       id="form-normal-login"
       :form="form"
-      :label-col="{ span: 3 }"
-      :wrapper-col="{ span: 19 }"
+      :label-col="{ span: 4 }"
+      :wrapper-col="{ span: 20 }"
       labelAlign="left"
       :hideRequiredMark="true"
       :colon="false">
@@ -38,14 +38,13 @@
           placeholder="请输入您的密码"
         />
       </a-form-item>
-      <a-form-model-item class="textAC">
+      <a-form-model-item class="buttonCenter" :wrapper-col="{ span: 24 }">
         <a-space>
-          <a-button @click="handleCancel" class="clear-from-button1 btnR">
+          <a-button @click="handleCancel">
             取消
           </a-button>
           <a-button
             type="primary"
-            class="primarybtn btnR marginleft"
             @click="handleOk"
             >
             确定

@@ -10,8 +10,8 @@
             id="form-normal-login"
             :form="formTel"
             class="login-form"
-            :label-col="{ span: 3 }"
-            :wrapper-col="{ span: 19 }"
+            :label-col="{ span: 4 }"
+            :wrapper-col="{ span: 20 }"
             labelAlign="left"
             @submit="handleSubmit"
             :hideRequiredMark="true"
@@ -39,8 +39,8 @@
                 </a-button>
               </a-input-search>
             </a-form-item>
-            <a-form-item :label-col="{ span: 0 }" :wrapper-col="{ span: 22 }">
-              <a-button type="danger" block html-type="submit" class="login-form-button">
+            <a-form-item :label-col="{ span: 0 }" :wrapper-col="{ span: 24 }">
+              <a-button type="danger" block html-type="submit" size="large">
                 登录
               </a-button>
             </a-form-item>
@@ -51,8 +51,8 @@
             id="form-normal-login"
             :form="formCode"
             class="login-form"
-            :label-col="{ span: 3 }"
-            :wrapper-col="{ span: 19 }"
+            :label-col="{ span: 4 }"
+            :wrapper-col="{ span: 20 }"
             labelAlign="left"
             @submit="handleSubmit"
             :hideRequiredMark="true"
@@ -71,8 +71,8 @@
                 </a-button>
               </a-input-search>
             </a-form-item>
-            <a-form-item :label-col="{ span: 0 }" :wrapper-col="{ span: 22 }">
-              <a-button type="danger" block html-type="submit" class="login-form-button">
+            <a-form-item :label-col="{ span: 0 }" :wrapper-col="{ span: 24 }">
+              <a-button type="danger" block html-type="submit" size="large">
                 登录
               </a-button>
             </a-form-item>
@@ -84,7 +84,7 @@
 </template>
 <script>
 import CommonLogin from '@/views/login/components/common'
-import {goLogin} from "@/api/Interface/index"
+// import {goLogin} from "@/api/Interface/index"
 import codeImg from '../../assets/img/delimg/codeimg1.png'
 export default {
   name: 'Home',
@@ -115,23 +115,24 @@ export default {
   methods: {
     handleSubmit(e) {
       e.preventDefault();
-      this.form.validateFields((err, values) => {
-        if (!err) {
-          console.log('Received values of form: ', values);
-          let obj = {
-            account: values.account,
-            password: values.password
-          }
-          goLogin(obj).then(res=>{
-            if(res.data.code === 1 ){
-              this.$router.push("/Home")
-              this.$message.success(res.data.message);
-            }else{
-              this.$message.error(res.data.message);
-            }
-          })
-        }
-      });
+      this.$router.push("/Home")
+      // this.form.validateFields((err, values) => {
+      //   if (!err) {
+      //     console.log('Received values of form: ', values);
+      //     let obj = {
+      //       account: values.account,
+      //       password: values.password
+      //     }
+      //     goLogin(obj).then(res=>{
+      //       if(res.data.code === 1 ){
+      //         this.$router.push("/Home")
+      //         this.$message.success(res.data.message);
+      //       }else{
+      //         this.$message.error(res.data.message);
+      //       }
+      //     })
+      //   }
+      // });
     },
     // 验证码点击
     onSearch(value) {
