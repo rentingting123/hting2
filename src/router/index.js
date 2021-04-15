@@ -18,7 +18,14 @@ import customer from '@/views/customer'
 import customerAdd from '@/views/customer/add'
 import customerDetails from '@/views/customer/details'
 
+//运营管理
 import operate from '@/views/operate'
+import resources from '@/views/operate/resources/index' // 资源管理
+import companyManage from '@/views/operate/companyManage/index' // 公司管理
+import organizationalStructure from '@/views/operate/organizationalStructure/index' // 组织架构
+import accountManage from '@/views/operate/accountManage/index' // 账号管理
+import MoneyDetails from '@/views/operate/MoneyDetails/index' // 鉴赏金明细
+
 import myInfo from '@/views/myInfo'
 //登录
 import login from '@/views/login/login'
@@ -146,6 +153,48 @@ export const pageRouter = [
       title: '运营管理',
       icon: 'team'
     },
+    children: [ 
+      {
+        path: '/resources',
+        name: 'resources',
+        component: resources,
+        meta: {
+          title: '资源管理',
+        },
+      },
+      {
+        path: '/companyManage',
+        name: 'companyManage',
+        component: companyManage,
+        meta: {
+          title: '公司管理',
+        },
+      },
+      {
+        path: '/organizationalStructure',
+        name: 'organizationalStructure',
+        component: organizationalStructure,
+        meta: {
+          title: '组织架构',
+        },
+      },
+      {
+        path: '/accountManage',
+        name: 'accountManage',
+        component: accountManage,
+        meta: {
+          title: '账号管理',
+        },
+      },
+      {
+        path: '/MoneyDetails',
+        name: 'MoneyDetails',
+        component: MoneyDetails,
+        meta: {
+          title: '鉴赏金明细',
+        },
+      },
+     ]
   },
   {
     path: '/myInfo',
